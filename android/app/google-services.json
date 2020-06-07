@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "78590732473",
+    "firebase_url": "https://weight-tracker-two.firebaseio.com",
+    "project_id": "weight-tracker-two",
+    "storage_bucket": "weight-tracker-two.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78590732473:android:ee350a9cc02bf3c1801368",
+        "android_client_info": {
+          "package_name": "com.example.weighttrackertwo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDld3lcGhzb4UvoLmbdTU4RtuaRym6_G8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
