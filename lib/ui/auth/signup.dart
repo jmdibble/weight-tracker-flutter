@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/ui/home/home.dart';
 import 'package:weighttrackertwo/ui/validators/email_validator.dart';
 import 'package:weighttrackertwo/ui/validators/password_validator.dart';
+import 'package:weighttrackertwo/ui/validators/textfield_validator.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
 
@@ -70,15 +71,15 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 30),
                   PrimaryFormField(
                     controller: firstController,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(labelText: "First name"),
-                    validator: (value) =>
-                        value.isEmpty ? 'First name cannot be empty' : null,
+                    validator: TextFieldValidator.validate,
                   ),
                   PrimaryFormField(
                     controller: lastController,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(labelText: "Last name"),
-                    validator: (value) =>
-                        value.isEmpty ? 'Last name cannot be empty' : null,
+                    validator: TextFieldValidator.validate,
                   ),
                   PrimaryFormField(
                     controller: emailController,

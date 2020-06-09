@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PrimaryFormField extends StatelessWidget {
   FocusNode myFocusNode = new FocusNode();
@@ -6,6 +7,7 @@ class PrimaryFormField extends StatelessWidget {
   TextEditingController controller;
   InputDecoration decoration;
   String Function(String) validator;
+  TextCapitalization textCapitalization;
   String labelText;
   bool obscureText;
   TextInputType keyboardType;
@@ -16,6 +18,7 @@ class PrimaryFormField extends StatelessWidget {
     Key key,
     this.controller,
     this.decoration,
+    this.textCapitalization,
     this.validator,
     this.labelText,
     this.obscureText,
@@ -29,15 +32,14 @@ class PrimaryFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       initialValue: initialValue,
+      textCapitalization: textCapitalization ?? TextCapitalization.none,
       cursorColor: Theme.of(context).primaryColor,
       obscureText: obscureText ?? false,
       controller: controller,
       decoration: (decoration ?? InputDecoration()).copyWith(
         labelText: labelText,
         labelStyle: TextStyle(
-            color: myFocusNode.hasFocus
-                ? Theme.of(context).primaryColor
-                : Colors.grey),
+            color: myFocusNode.hasFocus ? Theme.of(context).primaryColor : Colors.grey),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
