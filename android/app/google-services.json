@@ -30,6 +30,49 @@
             {
               "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "78590732473-6v22717t6u7tasm2gp2tspmbka6klj5o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.weighttrackertwo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78590732473:android:d33dd9934a7b7deb801368",
+        "android_client_info": {
+          "package_name": "io.dibble.weighttrackertwo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDld3lcGhzb4UvoLmbdTU4RtuaRym6_G8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "78590732473-6v22717t6u7tasm2gp2tspmbka6klj5o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.weighttrackertwo"
+              }
             }
           ]
         }

@@ -1,4 +1,4 @@
-package com.example.weighttrackertwo
+package io.dibble.weighttrackertwo
 
 import io.flutter.embedding.android.FlutterActivity
 
