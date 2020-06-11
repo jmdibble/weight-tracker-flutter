@@ -17,6 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("lib/assets/weighttracker_logo.png"), context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(

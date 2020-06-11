@@ -189,7 +189,6 @@ class _EditWeightState extends State<EditWeight> {
                   );
                   Navigator.pop(context);
                   Navigator.pop(context);
-                  Navigator.pop(context);
                 },
                 child: Text(
                   "Delete",

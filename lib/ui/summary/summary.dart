@@ -40,181 +40,206 @@ class SummaryPage extends StatelessWidget {
                           child: PrimaryCircularProgress(),
                         );
                       } else if (state is WeightChangedState) {
-                        var currentWeight =
-                            "${state.weight[0].weightSt}st ${state.weight[0].weightLb}lb";
-                        var firstMeasurement =
-                            "${state.weight[state.weight.length - 1].weightSt}st ${state.weight[state.weight.length - 1].weightLb}lb";
-                        var lastGain = ((state.weight[0].weightSt) * 14) +
-                            (state.weight[0].weightLb) -
-                            ((state.weight[1].weightSt) * 14) -
-                            (state.weight[1].weightLb);
-                        var totalGain = ((state.weight[0].weightSt) * 14) +
-                            (state.weight[0].weightLb) -
-                            ((state.weight[state.weight.length - 1].weightSt) * 14) -
-                            (state.weight[state.weight.length - 1].weightLb);
+                        var lastGain;
+                        var totalGain;
+                        var currentWeight;
+                        var firstMeasurement;
+                        if (state.weight.length == 0) {
+                          return Text(
+                            "Add some weights to see your stats",
+                            style: TextStyle(color: Colors.grey),
+                          );
+                        } else {
+                          currentWeight =
+                              "${state.weight[0].weightSt}st ${state.weight[0].weightLb}lb";
+                          firstMeasurement =
+                              "${state.weight.last.weightSt}st ${state.weight.last.weightLb}lb";
+                          state.weight.length == 1
+                              ? lastGain = 0
+                              : lastGain = ((state.weight[0].weightSt) * 14) +
+                                  (state.weight[0].weightLb) -
+                                  ((state.weight[1].weightSt) * 14) -
+                                  (state.weight[1].weightLb);
+                          totalGain = ((state.weight[0].weightSt) * 14) +
+                              (state.weight[0].weightLb) -
+                              ((state.weight.last.weightSt) * 14) -
+                              (state.weight.last.weightLb);
 
-                        return Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Your last 3 months",
-                                style: TextStyle(
-                                    fontSize: 16.0, fontWeight: FontWeight.bold),
+                          return Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Your last 3 months",
+                                  style: TextStyle(
+                                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 30),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 220,
-                              child: _buildLineChart(context, state),
-                            ),
-                            SizedBox(height: 30),
-                            Container(
-                              height: 100,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Current weight",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              currentWeight,
-                                              style: TextStyle(
-                                                  color: Theme.of(context).primaryColor,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Last gain/loss",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              "$lastGain lb",
-                                              style: TextStyle(
-                                                  color: Theme.of(context).primaryColor,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              SizedBox(height: 30),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 220,
+                                child: _buildLineChart(context, state),
                               ),
-                            ),
-                            SizedBox(height: 20),
-                            Container(
-                              height: 100,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Expanded(
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "First measurement",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              firstMeasurement,
-                                              style: TextStyle(
-                                                  color: Theme.of(context).primaryColor,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Total gain/loss",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              "$totalGain lb",
-                                              style: TextStyle(
-                                                  color: Theme.of(context).primaryColor,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              SizedBox(height: 25),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Your stats",
+                                  style: TextStyle(
+                                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            )
-                          ],
-                        );
+                              SizedBox(height: 10),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Current weight",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                currentWeight,
+                                                style: TextStyle(
+                                                    color: Theme.of(context).primaryColor,
+                                                    fontSize: 24.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Last gain/loss",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                "$lastGain lb",
+                                                style: TextStyle(
+                                                    color: Theme.of(context).primaryColor,
+                                                    fontSize: 24.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "First measurement",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                firstMeasurement,
+                                                style: TextStyle(
+                                                    color: Theme.of(context).primaryColor,
+                                                    fontSize: 24.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Total gain/loss",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                "$totalGain lb",
+                                                style: TextStyle(
+                                                    color: Theme.of(context).primaryColor,
+                                                    fontSize: 24.0,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          );
+                        }
                       } else {
-                        return Container();
+                        return Text(
+                          "You haven't added any measurements yet",
+                          style: TextStyle(color: Colors.grey),
+                        );
                       }
                     },
                   ),

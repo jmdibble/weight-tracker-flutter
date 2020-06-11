@@ -102,7 +102,8 @@ class _SignupPageState extends State<SignupPage> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       passwordsMatch ? "" : "Passwords must match",
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(
+                          color: Colors.red, fontSize: 12, fontWeight: FontWeight.w300),
                     ),
                   ),
                   SizedBox(height: 30),
@@ -125,9 +126,9 @@ class _SignupPageState extends State<SignupPage> {
                               style: TextStyle(color: Colors.grey[800]),
                             ),
                       onPressed: () async {
-                        if (passwordController.text == confirmController.text &&
-                            passwordController.text != "") {
-                          if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState.validate()) {
+                          if (passwordController.text == confirmController.text &&
+                              passwordController.text != "") {
                             bloc.add(
                               SignupEvent(
                                 email: emailController.value.text,
@@ -161,6 +162,10 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   _navigateToSignin(BuildContext context) {
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (BuildContext context) {
+        return SigninPage();
+      }),
+    );
   }
 }

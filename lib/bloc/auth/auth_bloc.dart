@@ -17,13 +17,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is SignupEvent) {
       yield AuthLoadingState();
-      var user = await authService.signUp(
-        event.email.trim(),
-        event.password.trim(),
-        event.firstName.trim(),
-        event.lastName.trim(),
-      );
-      yield AuthorisedState(user: user);
+      try {
+        var user = await authService.signUp(
+          event.email.trim(),
+          event.password.trim(),
+          event.firstName.trim(),
+          event.lastName.trim(),
+        );
+        yield AuthorisedState(user: user);
+      } catch (e) {
+        yield UnauthorisedState(message: "That didn't work, please try again");
+      }
     } else if (event is SigninEvent) {
       yield AuthLoadingState();
       try {
@@ -33,7 +37,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         yield AuthorisedState(user: user);
       } catch (e) {
-        yield UnauthorisedState(message: e.toString());
+        print(e);
+        print(e.message);
+        yield UnauthorisedState(message: "Check your username and password");
       }
     } else if (event is SignoutEvent) {
       await authService.signOut();

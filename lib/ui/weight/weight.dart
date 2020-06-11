@@ -36,28 +36,35 @@ class WeightPage extends StatelessWidget {
                       child: PrimaryCircularProgress(),
                     );
                   } else if (state is WeightChangedState) {
-                    return ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: state.weight.length,
-                      itemBuilder: (BuildContext context, int i) {
-                        return ListTile(
-                          onTap: () {
-                            currentWeight = state.weight[i];
-                            _navigateToDetails(context, currentWeight);
-                          },
-                          leading: _showIcon(context, i, state),
-                          title: Text(
-                              "${state.weight[i].weightSt}st ${state.weight[i].weightLb}lb"),
-                          subtitle: Text(
-                              "${DateFormat.yMMMd().format(state.weight[i].date.toDate())}"),
-                          trailing: IconButton(
-                            icon: Icon(Icons.chevron_right),
-                            onPressed: () {},
-                          ),
-                        );
-                      },
-                    );
+                    if (state.weight.length == 0) {
+                      return Text(
+                        "You haven't added any measurements yet",
+                        style: TextStyle(color: Colors.grey),
+                      );
+                    } else {
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: state.weight.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          return ListTile(
+                            onTap: () {
+                              currentWeight = state.weight[i];
+                              _navigateToDetails(context, currentWeight);
+                            },
+                            leading: _showIcon(context, i, state),
+                            title: Text(
+                                "${state.weight[i].weightSt}st ${state.weight[i].weightLb}lb"),
+                            subtitle: Text(
+                                "${DateFormat.yMMMd().format(state.weight[i].date.toDate())}"),
+                            trailing: IconButton(
+                              icon: Icon(Icons.chevron_right),
+                              onPressed: () {},
+                            ),
+                          );
+                        },
+                      );
+                    }
                   } else {
                     return Container();
                   }

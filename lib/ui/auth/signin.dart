@@ -160,7 +160,7 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   _navigateToSignup(BuildContext context) {
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) {
           return SignupPage();
