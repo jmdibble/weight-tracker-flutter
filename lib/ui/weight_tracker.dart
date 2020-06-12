@@ -5,6 +5,7 @@ import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
 import 'package:weighttrackertwo/ui/auth/intro.dart';
 import 'package:weighttrackertwo/ui/auth/signin.dart';
 import 'package:weighttrackertwo/ui/home/home.dart';
+import 'package:page_transition/page_transition.dart';
 
 class WeightTracker extends StatelessWidget {
   @override
@@ -18,6 +19,8 @@ class WeightTracker extends StatelessWidget {
           return IntroSplash();
         } else if (state is UnauthorisedState) {
           return IntroSplash();
+        } else if (state is AuthFailState) {
+          return SigninPage();
         } else if (state is AuthorisedState) {
           return HomePage();
         }

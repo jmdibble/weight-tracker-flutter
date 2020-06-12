@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
+import 'package:weighttrackertwo/models/user_model.dart';
 import 'package:weighttrackertwo/services/auth_service.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -15,6 +17,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    if (event is InitialAuthEvent) {
+      yield AuthLoadingState();
+      if (authService.getCurrentUser() != null) {
+        var user = await authService.getCurrentUserObject();
+        AuthorisedState(user: user);
+      } else {
+        yield UnauthorisedState();
+      }
+    }
+
     if (event is SignupEvent) {
       yield AuthLoadingState();
       try {
@@ -38,10 +50,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthorisedState(user: user);
       } catch (e) {
         print(e);
-        print(e.message);
         yield UnauthorisedState(message: "Check your username and password");
       }
     } else if (event is SignoutEvent) {
+      User user = new User();
+      yield AuthorisedState(user: user);
       await authService.signOut();
       yield UnauthorisedState(message: "");
     } else if (event is ChangeEmailEvent) {

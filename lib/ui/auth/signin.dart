@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
+import 'package:weighttrackertwo/main.dart';
 import 'package:weighttrackertwo/ui/auth/reset_password.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/ui/validators/email_validator.dart';
 import 'package:weighttrackertwo/ui/validators/password_validator.dart';
+import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SigninPage extends StatefulWidget {
   @override
@@ -39,7 +42,8 @@ class _SigninPageState extends State<SigninPage> {
           setState(() {
             isLoading = false;
           });
-          Navigator.pop(context);
+          Navigator.pushReplacement(context,
+              PageTransition(type: PageTransitionType.fade, child: WeightTracker()));
         }
       },
       child: Scaffold(
@@ -164,7 +168,8 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   _navigateToSignup(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.pushReplacement(
+        context, PageTransition(type: PageTransitionType.fade, child: MyApp()));
   }
 
   _navigateToResetPassword(BuildContext context) {

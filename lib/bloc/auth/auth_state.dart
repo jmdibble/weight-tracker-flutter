@@ -30,13 +30,13 @@ class AuthLoadingState extends AuthState {
   List<Object> get props => [];
 }
 
-//class AuthFailState extends AuthState {
-//  String message;
-//  AuthFailState(this.message);
-//
-//  @override
-//  List<Object> get props => [];
-//}
+class AuthFailState extends AuthState {
+  String message;
+  AuthFailState({this.message});
+
+  @override
+  List<Object> get props => [];
+}
 
 //class ResetPasswordState extends AuthState {
 //  @override
