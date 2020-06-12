@@ -39,6 +39,7 @@ class _SigninPageState extends State<SigninPage> {
           setState(() {
             isLoading = false;
           });
+          Navigator.pop(context);
         }
       },
       child: Scaffold(
@@ -88,7 +89,7 @@ class _SigninPageState extends State<SigninPage> {
                   Container(
                     child: FlatButton(
                       child: Text(
-                        "Forgot password?",
+                        "Forgotten password?",
                         style: TextStyle(fontWeight: FontWeight.w400),
                       ),
                       onPressed: () {
@@ -126,13 +127,16 @@ class _SigninPageState extends State<SigninPage> {
                       ),
                       color: Theme.of(context).primaryColor,
                       child: isLoading
-                          ? PrimaryCircularProgress()
+                          ? Container(
+                              height: 10,
+                              width: 10,
+                              child: PrimaryCircularProgress(),
+                            )
                           : Text(
                               "Sign in",
                               style: TextStyle(color: Colors.grey[800]),
                             ),
                       onPressed: () {
-                        print("Signin pressed");
                         if (_formKey.currentState.validate()) {
                           bloc.add(
                             SigninEvent(
@@ -148,7 +152,7 @@ class _SigninPageState extends State<SigninPage> {
                     onPressed: () {
                       _navigateToSignup(context);
                     },
-                    child: Text("Sign up instead"),
+                    child: Text("Back"),
                   )
                 ],
               ),
@@ -160,13 +164,7 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   _navigateToSignup(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) {
-          return SignupPage();
-        },
-      ),
-    );
+    Navigator.pop(context);
   }
 
   _navigateToResetPassword(BuildContext context) {

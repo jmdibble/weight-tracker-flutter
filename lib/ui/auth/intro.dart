@@ -74,7 +74,7 @@ class CurvedShape extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageTransition(
-                      type: PageTransitionType.upToDown,
+                      type: PageTransitionType.fade,
                       duration: Duration(milliseconds: 500),
                       child: SigninPage(),
                     ),

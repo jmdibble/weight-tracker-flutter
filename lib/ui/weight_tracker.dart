@@ -17,7 +17,7 @@ class WeightTracker extends StatelessWidget {
         if (state is AuthInitialState) {
           return IntroSplash();
         } else if (state is UnauthorisedState) {
-          return SigninPage();
+          return IntroSplash();
         } else if (state is AuthorisedState) {
           return HomePage();
         }

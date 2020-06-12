@@ -250,14 +250,9 @@ class ProfilePage extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return MyApp();
-                    },
-                  ),
-                );
+                await Navigator.pop(context);
                 await authBloc.add(SignoutEvent());
+//
               },
               child: Text(
                 "Logout",

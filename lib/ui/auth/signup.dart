@@ -150,7 +150,7 @@ class _SignupPageState extends State<SignupPage> {
                     onPressed: () {
                       _navigateToSignin(context);
                     },
-                    child: Text("Sign in instead"),
+                    child: Text("Back"),
                   )
                 ],
               ),
@@ -162,10 +162,6 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   _navigateToSignin(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return SigninPage();
-      }),
-    );
+    Navigator.pop(context);
   }
 }
