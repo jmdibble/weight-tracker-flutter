@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:weighttrackertwo/ui/auth/signin.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
@@ -55,7 +53,7 @@ class CurvedShape extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
+//                  width: double.infinity,
                   child: PrimaryButton(
                     onPressed: () {
                       Navigator.push(
@@ -113,7 +111,7 @@ class _MyPainter extends CustomPainter {
 
     path.moveTo(0, size.height * 0.72);
     path.quadraticBezierTo(
-        size.width / 1.8, size.height / 1.8, size.width, size.height * 0.63);
+        size.width / 1.8, size.height / 1.8, size.width, size.height * 0.72);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
 
