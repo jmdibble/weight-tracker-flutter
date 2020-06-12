@@ -112,6 +112,7 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: RaisedButton(
+                      key: Key('signin-button'),
                       padding: EdgeInsets.all(12.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0),

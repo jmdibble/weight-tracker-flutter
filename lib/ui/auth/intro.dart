@@ -51,6 +51,7 @@ class CurvedShape extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Container(
+                  height: 40,
                   width: double.infinity,
                   child: PrimaryButton(
                     onPressed: () {
