@@ -53,14 +53,14 @@ class _SignupPageState extends State<SignupPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
                   Container(
                     width: 120,
                     child: Image(
                       image: AssetImage('lib/assets/weighttracker_logo.png'),
                     ),
                   ),
-                  SizedBox(height: 60),
+                  SizedBox(height: 40),
                   Container(
                     child: Text(
                       "Sign up",
@@ -68,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   PrimaryFormField(
                     controller: firstController,
                     textCapitalization: TextCapitalization.words,

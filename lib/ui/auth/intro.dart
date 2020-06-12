@@ -9,6 +9,7 @@ class IntroSplash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Center(
             child: Column(
@@ -25,9 +26,7 @@ class IntroSplash extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: CurvedShape(),
-          ),
+          CurvedShape(),
         ],
       ),
     );
@@ -38,10 +37,9 @@ class CurvedShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: StackFit.expand,
       children: [
         Container(
-          width: double.infinity,
-          height: double.infinity,
           child: CustomPaint(
             painter: _MyPainter(context: context),
           ),
