@@ -44,11 +44,11 @@ class MyApp extends StatelessWidget {
 }
 
 /// todos
-// todo: auto log in
-// todo: sort out weight details
+// todo: auto log in (kind of)
+// todo: sort out weight details (leaving for now)
 // todo: wait for picture before loading login
-// todo: translate errors
-// todo: custom styling?
+// todo: translate errors (half)
+// todo: custom styling? (attempted)
 // todo: cursor color
 // todo: add BMI
 // todo: get dates on graph tooltips

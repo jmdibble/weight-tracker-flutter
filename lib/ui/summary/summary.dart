@@ -102,7 +102,7 @@ class SummaryPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(16.0),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
@@ -133,7 +133,7 @@ class SummaryPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(16.0),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
@@ -161,7 +161,7 @@ class SummaryPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 10),
                               Container(
                                 height: 100,
                                 child: Row(
@@ -173,7 +173,7 @@ class SummaryPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(16.0),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
@@ -204,7 +204,7 @@ class SummaryPage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(16.0),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
