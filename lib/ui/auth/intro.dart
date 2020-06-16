@@ -1,34 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:weighttrackertwo/ui/auth/signin.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
 
-class IntroSplash extends StatelessWidget {
+class IntroSplash extends StatefulWidget {
+  @override
+  _IntroSplashState createState() => _IntroSplashState();
+}
+
+class _IntroSplashState extends State<IntroSplash> {
+  double _width = 0;
+  bool _visible = false;
+
+  initState() {
+    super.initState();
+    Future<void>.delayed(Duration(milliseconds: 300), () {
+      _updateState();
+    });
+  }
+
+  double _updateState() {
+    setState(() {
+      _width = 200;
+      _visible = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 100,
-                ),
-                Container(
-                  width: 150,
-                  child: Image(
-                    image: AssetImage('lib/assets/weighttracker_logo.png'),
+    return WillPopScope(
+      onWillPop: () {
+        _showExitDialog(context);
+      },
+      child: Scaffold(
+        body: Stack(
+//        fit: StackFit.expand,
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 100,
                   ),
-                ),
-              ],
+                  AnimatedOpacity(
+                    opacity: _visible ? 1.0 : 0.0,
+                    duration: Duration(milliseconds: 2500),
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 1800),
+                      curve: Curves.decelerate,
+                      width: _width,
+                      child: Image(
+                        image: AssetImage('lib/assets/weighttracker_logo.png'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          CurvedShape(),
-        ],
+            CurvedShape(),
+          ],
+        ),
       ),
+    );
+  }
+
+  _showExitDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return PrimaryDialog(
+          content: Text("Exit app?"),
+          actions: [
+            FlatButton(
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.grey),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              onPressed: () async {
+                await SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+//
+              },
+              child: Text(
+                "Exit",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

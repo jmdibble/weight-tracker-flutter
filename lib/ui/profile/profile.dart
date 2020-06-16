@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
+import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
 
 class ProfilePage extends StatelessWidget {
   User user;
@@ -236,7 +237,7 @@ class ProfilePage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return PrimaryDialog(
           content: Text("Are you sure you want to logout?"),
           actions: [
             FlatButton(

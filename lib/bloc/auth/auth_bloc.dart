@@ -8,9 +8,7 @@ import 'package:weighttrackertwo/services/auth_service.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthService authService;
 
-  AuthBloc() {
-    authService = AuthService();
-  }
+  AuthBloc({this.authService});
 
   @override
   AuthState get initialState => AuthInitialState();

@@ -75,6 +75,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   PrimaryFormField(
                     key: Key('email-field'),
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: "Email address",
                       focusedBorder: UnderlineInputBorder(

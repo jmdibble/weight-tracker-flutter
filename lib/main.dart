@@ -3,6 +3,7 @@ import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/services/auth_service.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'bloc/weight/weight_bloc.dart';
 import 'package:weighttrackertwo/ui/theme/theme.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (ctx) => AuthBloc()
+          create: (ctx) => AuthBloc(authService: AuthService())
             ..add(
               InitialAuthEvent(),
             ),

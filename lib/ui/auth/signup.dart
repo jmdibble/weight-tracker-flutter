@@ -85,6 +85,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   PrimaryFormField(
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(labelText: "Email address"),
                     validator: EmailFieldValidator.validate,
                   ),

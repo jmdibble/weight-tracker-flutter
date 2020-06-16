@@ -7,6 +7,7 @@ import 'package:weighttrackertwo/ui/home/home.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_button.dart';
+import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -169,7 +170,7 @@ class _EditWeightState extends State<EditWeight> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return PrimaryDialog(
             title: Text("Delete measurement"),
             content: Text("Are you sure?"),
             actions: [

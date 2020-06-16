@@ -74,6 +74,7 @@ class _SigninPageState extends State<SigninPage> {
                   PrimaryFormField(
                     key: Key('email-field'),
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: "Email address",
                       focusedBorder: UnderlineInputBorder(
