@@ -1,11 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class AuthEvent extends Equatable {}
 
 class InitialAuthEvent extends AuthEvent {
+  FirebaseUser firebaseUser;
+  InitialAuthEvent({this.firebaseUser});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [firebaseUser];
 }
 
 class SigninEvent extends AuthEvent {
@@ -13,7 +18,12 @@ class SigninEvent extends AuthEvent {
   final String email;
   final String password;
 
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [email, password];
+}
+
+class SigninGoogleEvent extends AuthEvent {
+  @override
+  List<Object> get props => [];
 }
 
 class SignupEvent extends AuthEvent {
@@ -23,12 +33,12 @@ class SignupEvent extends AuthEvent {
   final String firstName;
   final String lastName;
 
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [email, password, firstName, lastName];
 }
 
 class SignoutEvent extends AuthEvent {
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [];
 }
 
 class ResetPasswordEvent extends AuthEvent {
@@ -36,7 +46,7 @@ class ResetPasswordEvent extends AuthEvent {
   String email;
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [email];
 }
 
 class ChangeEmailEvent extends AuthEvent {
@@ -45,7 +55,7 @@ class ChangeEmailEvent extends AuthEvent {
   final String password;
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [newEmail, password];
 }
 
 class ChangePasswordEvent extends AuthEvent {
@@ -54,7 +64,7 @@ class ChangePasswordEvent extends AuthEvent {
   final String newPassword;
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [password, newPassword];
 }
 
 class ChangeDetailsEvent extends AuthEvent {
@@ -63,7 +73,7 @@ class ChangeDetailsEvent extends AuthEvent {
   final String lastName;
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [firstName, lastName];
 }
 
 class UploadDisplayPictureEvent extends AuthEvent {
@@ -72,5 +82,5 @@ class UploadDisplayPictureEvent extends AuthEvent {
   final File localFile;
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [localFile];
 }

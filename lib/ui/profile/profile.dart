@@ -251,9 +251,7 @@ class ProfilePage extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () async {
-                await Navigator.pop(context);
                 await authBloc.add(SignoutEvent());
-//
               },
               child: Text(
                 "Logout",

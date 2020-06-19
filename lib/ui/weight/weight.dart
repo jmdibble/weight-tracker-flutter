@@ -37,9 +37,14 @@ class WeightPage extends StatelessWidget {
                     );
                   } else if (state is WeightChangedState) {
                     if (state.weight.length == 0) {
-                      return Text(
-                        "You haven't added any measurements yet",
-                        style: TextStyle(color: Colors.grey),
+                      return Column(
+                        children: [
+                          SizedBox(height: 24),
+                          Text(
+                            "You haven't added any measurements yet",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
                       );
                     } else {
                       return ListView.builder(

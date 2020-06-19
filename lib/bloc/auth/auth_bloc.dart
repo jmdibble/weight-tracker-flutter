@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
@@ -8,7 +11,15 @@ import 'package:weighttrackertwo/services/auth_service.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthService authService;
 
-  AuthBloc({this.authService});
+  AuthBloc({this.authService}) {
+    authSub =
+        authService.firebaseAuth.onAuthStateChanged.listen((FirebaseUser firebaseUser) {
+      add(InitialAuthEvent(firebaseUser: firebaseUser));
+      print(firebaseUser);
+    });
+  }
+
+  StreamSubscription<FirebaseUser> authSub;
 
   @override
   AuthState get initialState => AuthInitialState();
@@ -17,9 +28,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is InitialAuthEvent) {
       yield AuthLoadingState();
-      if (authService.getCurrentUser() != null) {
+      if (event.firebaseUser != null) {
         var user = await authService.getCurrentUserObject();
-        AuthorisedState(user: user);
+        yield AuthorisedState(user: user);
       } else {
         yield UnauthorisedState();
       }
@@ -50,11 +61,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         print(e);
         yield UnauthorisedState(message: "Check your username and password");
       }
-    } else if (event is SignoutEvent) {
-      User user = new User();
+    } else if (event is SigninGoogleEvent) {
+      yield AuthLoadingState();
+      var user = await authService.signInWithGoogle();
       yield AuthorisedState(user: user);
+    } else if (event is SignoutEvent) {
+//      User user = new User();
+//      yield AuthorisedState(user: user);
       await authService.signOut();
-      yield UnauthorisedState(message: "");
+//      yield UnauthorisedState(message: "");
     } else if (event is ChangeEmailEvent) {
       yield AuthLoadingState();
       await authService.changeEmail(
@@ -86,5 +101,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       var user = await authService.getCurrentUserObject();
       yield AuthorisedState(user: user);
     }
+  }
+
+  @override
+  void dispose() {
+    authSub.cancel();
   }
 }

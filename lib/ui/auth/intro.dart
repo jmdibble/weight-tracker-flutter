@@ -122,7 +122,7 @@ class CurvedShape extends StatelessWidget {
                   width: double.infinity,
                   child: PrimaryButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         PageTransition(
                           type: PageTransitionType.fade,
@@ -139,7 +139,7 @@ class CurvedShape extends StatelessWidget {
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     PageTransition(
                       type: PageTransitionType.fade,

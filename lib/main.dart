@@ -19,13 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     precacheImage(AssetImage("lib/assets/weighttracker_logo.png"), context);
+    precacheImage(AssetImage("lib/assets/google-logo.png"), context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (ctx) => AuthBloc(authService: AuthService())
-            ..add(
-              InitialAuthEvent(),
-            ),
+          create: (ctx) => AuthBloc(authService: AuthService()),
         ),
         BlocProvider(
           create: (ctx) => NavBloc(),
@@ -44,7 +42,6 @@ class MyApp extends StatelessWidget {
 }
 
 /// todos
-// todo: auto log in (kind of)
 // todo: sort out weight details (leaving for now)
 // todo: wait for picture before loading login
 // todo: translate errors (half)

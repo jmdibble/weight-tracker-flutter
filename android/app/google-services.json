@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "78590732473-6v22717t6u7tasm2gp2tspmbka6klj5o.apps.googleusercontent.com",
+              "client_id": "78590732473-tn2i5mfcp46jkn615rglqd0k3tcdn2p2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.weighttrackertwo"
+                "bundle_id": "io.dibble.weighttrackertwo"
               }
             }
           ]
@@ -50,6 +50,30 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "78590732473-lc24lgemeahn21cmsqtib11075vqs2dd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.dibble.weighttrackertwo",
+            "certificate_hash": "88fd89620353fd9b83b39065d65ac0a85cf23b99"
+          }
+        },
+        {
+          "client_id": "78590732473-k5u2h2oud7chlu9t8154s0p7ktf3go9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.dibble.weighttrackertwo",
+            "certificate_hash": "c7087156f5ec48e26304a7b169fbfea3a9dbdaa5"
+          }
+        },
+        {
+          "client_id": "78590732473-4htgn03smlgfqkcgen3oan2bk6fr0gth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.dibble.weighttrackertwo",
+            "certificate_hash": "6d38156875cf9fde1553eea3e0245b5cc689ec7b"
+          }
+        },
         {
           "client_id": "78590732473-qckffl29vaho4lceq8stq15sbnnqbr25.apps.googleusercontent.com",
           "client_type": 3
@@ -68,10 +92,10 @@
               "client_type": 3
             },
             {
-              "client_id": "78590732473-6v22717t6u7tasm2gp2tspmbka6klj5o.apps.googleusercontent.com",
+              "client_id": "78590732473-tn2i5mfcp46jkn615rglqd0k3tcdn2p2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.weighttrackertwo"
+                "bundle_id": "io.dibble.weighttrackertwo"
               }
             }
           ]

@@ -114,7 +114,6 @@ class SummaryPage extends StatelessWidget {
                                                     fontSize: 14.0,
                                                     fontWeight: FontWeight.bold),
                                               ),
-                                              SizedBox(height: 10),
                                               Text(
                                                 currentWeight,
                                                 style: TextStyle(
@@ -127,6 +126,7 @@ class SummaryPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 10),
                                     Expanded(
                                       child: Card(
                                         shape: RoundedRectangleBorder(
@@ -145,7 +145,6 @@ class SummaryPage extends StatelessWidget {
                                                     fontSize: 14.0,
                                                     fontWeight: FontWeight.bold),
                                               ),
-                                              SizedBox(height: 10),
                                               Text(
                                                 "$lastGain lb",
                                                 style: TextStyle(
@@ -185,7 +184,6 @@ class SummaryPage extends StatelessWidget {
                                                     fontSize: 14.0,
                                                     fontWeight: FontWeight.bold),
                                               ),
-                                              SizedBox(height: 10),
                                               Text(
                                                 firstMeasurement,
                                                 style: TextStyle(
@@ -198,6 +196,7 @@ class SummaryPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 10),
                                     Expanded(
                                       child: Card(
                                         shape: RoundedRectangleBorder(
@@ -216,7 +215,6 @@ class SummaryPage extends StatelessWidget {
                                                     fontSize: 14.0,
                                                     fontWeight: FontWeight.bold),
                                               ),
-                                              SizedBox(height: 10),
                                               Text(
                                                 "$totalGain lb",
                                                 style: TextStyle(

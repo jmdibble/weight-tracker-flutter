@@ -7,10 +7,11 @@ ThemeData _buildDefaultTheme() {
   final ThemeData base = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xffb8f512),
-//    textTheme: GoogleFonts.josefinSansTextTheme(),
+    textTheme: GoogleFonts.muliTextTheme(),
   );
   return base.copyWith(
-    textTheme: _buildDefaultTextTheme(base.textTheme),
+    textTheme: _buildDefaultTextTheme(base.textTheme)
+        .apply(bodyColor: Colors.white, displayColor: Colors.grey),
     primaryTextTheme: _buildDefaultTextTheme(base.primaryTextTheme),
     accentTextTheme: _buildDefaultTextTheme(base.accentTextTheme),
   );

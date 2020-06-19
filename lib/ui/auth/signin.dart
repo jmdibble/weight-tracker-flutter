@@ -3,6 +3,7 @@ import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
 import 'package:weighttrackertwo/main.dart';
+import 'package:weighttrackertwo/services/auth_service.dart';
 import 'package:weighttrackertwo/ui/auth/reset_password.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+  AuthService authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -42,8 +44,9 @@ class _SigninPageState extends State<SigninPage> {
           setState(() {
             isLoading = false;
           });
-          Navigator.pushReplacement(context,
-              PageTransition(type: PageTransitionType.fade, child: WeightTracker()));
+        }
+        if (next is AuthorisedState) {
+          Navigator.of(context).pop();
         }
       },
       child: Scaffold(
@@ -66,7 +69,10 @@ class _SigninPageState extends State<SigninPage> {
                   Container(
                     child: Text(
                       "Sign in",
-                      style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     alignment: Alignment.center,
                   ),
@@ -111,7 +117,7 @@ class _SigninPageState extends State<SigninPage> {
                       builder: (ctx, state) {
                         if (state is UnauthorisedState) {
                           return Text(
-                            state.message,
+                            state.message ?? "",
                             key: Key('message-text'),
                             style: TextStyle(color: Theme.of(context).primaryColor),
                           );
@@ -122,37 +128,70 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: RaisedButton(
-                      key: Key('signin-button'),
-                      padding: EdgeInsets.all(12.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0),
-                      ),
-                      color: Theme.of(context).primaryColor,
-                      child: isLoading
-                          ? Container(
-                              height: 10,
-                              width: 10,
-                              child: PrimaryCircularProgress(),
-                            )
-                          : Text(
+                  isLoading
+                      ? Container(
+                          width: 20,
+                          height: 20,
+                          child: PrimaryCircularProgress(),
+                        )
+                      : SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: RaisedButton(
+                            key: Key('signin-button'),
+                            padding: EdgeInsets.all(12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
+                            ),
+                            color: Theme.of(context).primaryColor,
+                            child: Text(
                               "Sign in",
                               style: TextStyle(color: Colors.grey[800]),
                             ),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          bloc.add(
-                            SigninEvent(
-                              email: emailController.value.text,
-                              password: passwordController.value.text,
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                bloc.add(
+                                  SigninEvent(
+                                    email: emailController.value.text,
+                                    password: passwordController.value.text,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                  SizedBox(height: 10),
+                  isLoading
+                      ? Container()
+                      : SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: RaisedButton(
+                            padding: EdgeInsets.all(12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
                             ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 15,
+                                  child: Image(
+                                    image: AssetImage('lib/assets/google-logo.png'),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Sign in with Google",
+                                  style: TextStyle(color: Colors.grey[800]),
+                                ),
+                                SizedBox(width: 10),
+                              ],
+                            ),
+                            onPressed: () {
+                              bloc.add(SigninGoogleEvent());
+                            },
+                          ),
+                        ),
                   FlatButton(
                     onPressed: () {
                       _navigateToSignup(context);

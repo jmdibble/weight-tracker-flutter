@@ -66,7 +66,10 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     child: Text(
                       "Sign up",
-                      style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     alignment: Alignment.center,
                   ),
@@ -150,6 +153,39 @@ class _SignupPageState extends State<SignupPage> {
                       },
                     ),
                   ),
+                  SizedBox(height: 10),
+                  isLoading
+                      ? Container()
+                      : SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: RaisedButton(
+                            padding: EdgeInsets.all(12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
+                            ),
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 15,
+                                  child: Image(
+                                    image: AssetImage('lib/assets/google-logo.png'),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Sign up with Google",
+                                  style: TextStyle(color: Colors.grey[800]),
+                                ),
+                                SizedBox(width: 10),
+                              ],
+                            ),
+                            onPressed: () {
+                              bloc.add(SigninGoogleEvent());
+                            },
+                          ),
+                        ),
                   FlatButton(
                     onPressed: () {
                       _navigateToSignin(context);

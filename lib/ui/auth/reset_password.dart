@@ -58,7 +58,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   Container(
                     child: Text(
                       "Reset password",
-                      style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     alignment: Alignment.center,
                   ),
@@ -94,7 +97,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       builder: (ctx, state) {
                         if (state is UnauthorisedState) {
                           return Text(
-                            state.message,
+                            state.message ?? "",
                             key: Key('message-text'),
                             style: TextStyle(color: Theme.of(context).primaryColor),
                           );

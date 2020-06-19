@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:weighttrackertwo/models/user_model.dart';
 
 abstract class AuthState extends Equatable {}
@@ -22,7 +21,7 @@ class UnauthorisedState extends AuthState {
   UnauthorisedState({this.message});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }
 
 class AuthLoadingState extends AuthState {
@@ -35,10 +34,5 @@ class AuthFailState extends AuthState {
   AuthFailState({this.message});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }
-
-//class ResetPasswordState extends AuthState {
-//  @override
-//  List<Object> get props => [];
-//}

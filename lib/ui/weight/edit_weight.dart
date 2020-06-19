@@ -171,8 +171,7 @@ class _EditWeightState extends State<EditWeight> {
         context: context,
         builder: (BuildContext context) {
           return PrimaryDialog(
-            title: Text("Delete measurement"),
-            content: Text("Are you sure?"),
+            content: Text("Delete measurement?"),
             actions: [
               FlatButton(
                 child: Text(
