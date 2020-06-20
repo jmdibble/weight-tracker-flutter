@@ -5,6 +5,7 @@ import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
 import 'package:weighttrackertwo/ui/validators/textfield_validator.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_button.dart';
+import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -126,9 +127,7 @@ class _AddWeightState extends State<AddWeight> {
                 BlocBuilder<WeightBloc, WeightState>(
                   builder: (ctx, state) {
                     if (state is AddingWeightState) {
-                      return CircularProgressIndicator(
-                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                      );
+                      return PrimaryCircularProgress();
                     } else {
                       return SizedBox(
                         width: MediaQuery.of(context).size.width,

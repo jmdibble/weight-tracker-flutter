@@ -90,6 +90,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthLoadingState();
       await authService.changeUserDetails(event.firstName, event.lastName);
       var user = await authService.getCurrentUserObject();
+      yield ChangedSuccessState();
       yield AuthorisedState(user: user);
     } else if (event is ResetPasswordEvent) {
       yield AuthLoadingState();

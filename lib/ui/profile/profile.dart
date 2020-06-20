@@ -4,16 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
 import 'package:weighttrackertwo/main.dart';
 import 'package:weighttrackertwo/models/user_model.dart';
+import 'package:weighttrackertwo/ui/home/home.dart';
 import 'package:weighttrackertwo/ui/profile/change_email.dart';
 import 'package:weighttrackertwo/ui/profile/change_details.dart';
 import 'package:weighttrackertwo/ui/profile/change_password.dart';
 import 'package:weighttrackertwo/ui/profile/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
@@ -29,6 +32,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: PrimaryAppBar(
         title: "Profile",
+        implyLeading: false,
         actions: <Widget>[
 //          IconButton(
 //            icon: Icon(Icons.settings),
@@ -252,6 +256,10 @@ class ProfilePage extends StatelessWidget {
             FlatButton(
               onPressed: () async {
                 await authBloc.add(SignoutEvent());
+                await Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade, child: WeightTracker()));
               },
               child: Text(
                 "Logout",
@@ -262,5 +270,59 @@ class ProfilePage extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class CurvedShape extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          child: CustomPaint(
+            painter: _MyPainter(context: context),
+          ),
+        ),
+        Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Container(child: Text("Insert here")),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MyPainter extends CustomPainter {
+  BuildContext context;
+
+  _MyPainter({this.context});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Theme.of(context).primaryColor;
+    paint.style = PaintingStyle.fill; // Change this to fill
+
+    var path = Path();
+
+    path.lineTo(0, size.height / 4);
+    path.quadraticBezierTo(
+        size.width / 2, size.height / 1.8, size.width, size.height / 4);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }

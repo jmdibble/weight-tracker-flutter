@@ -7,6 +7,7 @@ import 'package:weighttrackertwo/bloc/nav/nav_bloc.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_state.dart';
 import 'package:weighttrackertwo/ui/profile/profile.dart';
+import 'package:weighttrackertwo/ui/profile/profile_new.dart';
 import 'package:weighttrackertwo/ui/summary/summary.dart';
 import 'package:weighttrackertwo/ui/weight/weight.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
@@ -108,7 +109,7 @@ Widget _buildBody(ShowNavState state) {
     case 1:
       return WeightPage();
     case 2:
-      return ProfilePage();
+      return ProfileNewPage();
     default:
       return ErrorWidget("State and page doesnt exist");
   }

@@ -13,6 +13,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:tuple/tuple.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
+import 'package:weighttrackertwo/ui/widgets/summary_card.dart';
 
 class SummaryPage extends StatelessWidget {
   @override
@@ -24,6 +25,7 @@ class SummaryPage extends StatelessWidget {
     return Scaffold(
       appBar: PrimaryAppBar(
         title: "Summary",
+        implyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -96,66 +98,16 @@ class SummaryPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Current weight",
-                                                style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                              Text(
-                                                currentWeight,
-                                                style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
-                                                    fontSize: 24.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                    SummaryCard(
+                                      title: "Recent weight",
+                                      subtitle: currentWeight,
+                                      subtitleColor: Theme.of(context).primaryColor,
                                     ),
                                     SizedBox(width: 10),
-                                    Expanded(
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Last gain/loss",
-                                                style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                              Text(
-                                                "$lastGain lb",
-                                                style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
-                                                    fontSize: 24.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                    SummaryCard(
+                                      title: "Last gain/loss",
+                                      subtitle: "$lastGain lb",
+                                      subtitleColor: Theme.of(context).primaryColor,
                                     ),
                                   ],
                                 ),
@@ -166,67 +118,16 @@ class SummaryPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Expanded(
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "First measurement",
-                                                style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                              Text(
-                                                firstMeasurement,
-                                                style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
-                                                    fontSize: 24.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                    SummaryCard(
+                                      title: "First measurement",
+                                      subtitle: firstMeasurement,
+                                      subtitleColor: Theme.of(context).primaryColor,
                                     ),
                                     SizedBox(width: 10),
-                                    Expanded(
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Total gain/loss",
-                                                style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                              Text(
-                                                "$totalGain lb",
-                                                style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
-                                                    fontSize: 24.0,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    SummaryCard(
+                                        title: "Total gain/loss",
+                                        subtitle: "$totalGain lb",
+                                        subtitleColor: Theme.of(context).primaryColor),
                                   ],
                                 ),
                               )

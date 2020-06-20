@@ -49,3 +49,4 @@ class MyApp extends StatelessWidget {
 // todo: cursor color
 // todo: add BMI
 // todo: get dates on graph tooltips
+// todo: pop change details pages

@@ -23,6 +23,7 @@ class WeightPage extends StatelessWidget {
     return Scaffold(
       appBar: PrimaryAppBar(
         title: "Weight",
+        implyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Center(

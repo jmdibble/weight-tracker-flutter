@@ -11,6 +11,7 @@ class PrimaryAppBar extends PreferredSize {
     this.backgroundColor,
     this.actions,
     this.iconTheme,
+    this.implyLeading,
   });
 
   double elevation;
@@ -19,6 +20,7 @@ class PrimaryAppBar extends PreferredSize {
   Color backgroundColor;
   List<Widget> actions;
   IconThemeData iconTheme;
+  bool implyLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class PrimaryAppBar extends PreferredSize {
       backgroundColor: backgroundColor ?? Colors.transparent,
       actions: actions,
       iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+      automaticallyImplyLeading: implyLeading ?? true,
     );
   }
 }

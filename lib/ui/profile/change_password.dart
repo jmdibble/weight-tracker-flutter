@@ -84,6 +84,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                     },
                   ),
                 ),
+                BlocListener<AuthBloc, AuthState>(
+                  condition: (prev, next) {
+                    next == ChangedSuccessState;
+                  },
+                  child: Container(),
+                  listener: (prev, next) {
+                    if (next is ChangedSuccessState) {
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
               ],
             ),
           ),
