@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
+import 'package:weighttrackertwo/ui/widgets/wt_animation.dart';
 
 class AuthLoading extends StatelessWidget {
   @override
@@ -10,13 +11,7 @@ class AuthLoading extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              width: 150,
-              child: Image(
-                image: AssetImage('lib/assets/weighttracker_logo.png'),
-              ),
-            ),
-            PrimaryCircularProgress(),
+            WtAnimation(),
           ],
         ),
       ),

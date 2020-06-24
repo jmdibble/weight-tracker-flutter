@@ -12,8 +12,8 @@ import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:tuple/tuple.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
-import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/summary_card.dart';
+import 'package:weighttrackertwo/ui/widgets/wt_animation.dart';
 
 class SummaryPage extends StatelessWidget {
   @override
@@ -38,9 +38,7 @@ class SummaryPage extends StatelessWidget {
                   child: BlocBuilder<WeightBloc, WeightState>(
                     builder: (ctx, state) {
                       if (state is WeightInitialState) {
-                        return Center(
-                          child: PrimaryCircularProgress(),
-                        );
+                        return Center(child: WtAnimation());
                       } else if (state is WeightChangedState) {
                         var lastGain;
                         var totalGain;

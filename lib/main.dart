@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/services/auth_service.dart';
+import 'package:weighttrackertwo/services/get_it_service.dart';
+import 'package:weighttrackertwo/services/notifications_service.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'bloc/weight/weight_bloc.dart';
 import 'package:weighttrackertwo/ui/theme/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  GetItService getIt = GetItService();
+  getIt.setup();
   runApp(
     MyApp(),
   );
