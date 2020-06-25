@@ -5,6 +5,7 @@ import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
 import 'package:weighttrackertwo/main.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/validators/email_validator.dart';
 import 'package:weighttrackertwo/ui/validators/password_validator.dart';
 import 'package:weighttrackertwo/ui/validators/textfield_validator.dart';
@@ -130,7 +131,7 @@ class _SignupPageState extends State<SignupPage> {
                             )
                           : Text(
                               "Sign up",
-                              style: TextStyle(color: Colors.grey[800]),
+                              style: TextStyle(color: WTColors.darkGrey),
                             ),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
@@ -176,7 +177,7 @@ class _SignupPageState extends State<SignupPage> {
                                 SizedBox(width: 10),
                                 Text(
                                   "Sign up with Google",
-                                  style: TextStyle(color: Colors.grey[800]),
+                                  style: TextStyle(color: WTColors.darkGrey),
                                 ),
                                 SizedBox(width: 10),
                               ],

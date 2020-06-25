@@ -11,6 +11,7 @@ import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:tuple/tuple.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/summary_card.dart';
 import 'package:weighttrackertwo/ui/widgets/wt_animation.dart';
@@ -328,7 +329,7 @@ class SummaryPage extends StatelessWidget {
                   );
                 }).toList();
               },
-              tooltipBgColor: Colors.grey[800],
+              tooltipBgColor: WTColors.darkGrey,
               tooltipRoundedRadius: 15,
               fitInsideHorizontally: true)),
         ),

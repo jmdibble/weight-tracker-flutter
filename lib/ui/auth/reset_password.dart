@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
-import 'package:weighttrackertwo/ui/auth/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weighttrackertwo/ui/home/home.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/validators/email_validator.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
@@ -121,7 +120,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ? PrimaryCircularProgress()
                           : Text(
                               "Send reset email",
-                              style: TextStyle(color: Colors.grey[800]),
+                              style: TextStyle(color: WTColors.darkGrey),
                             ),
                       onPressed: () {
                         if (_formKey.currentState.validate()) {

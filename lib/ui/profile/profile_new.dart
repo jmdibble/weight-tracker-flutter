@@ -13,10 +13,13 @@ import 'package:weighttrackertwo/ui/auth/loading.dart';
 import 'package:weighttrackertwo/ui/profile/change_details.dart';
 import 'package:weighttrackertwo/ui/profile/change_email.dart';
 import 'package:weighttrackertwo/ui/profile/change_password.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
+
+import 'notifications.dart';
 
 class ProfileNewPage extends StatelessWidget {
   @override
@@ -25,6 +28,21 @@ class ProfileNewPage extends StatelessWidget {
       appBar: PrimaryAppBar(
 //        title: "Profile",
         backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            color: WTColors.darkGrey,
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.upToDown,
+                  child: NotificationsPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: CurvedShape(),
     );
@@ -194,7 +212,7 @@ class CurvedShape extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: Icon(
                     Icons.edit,
-                    color: Colors.grey,
+                    color: WTColors.darkGrey,
                   ),
                   onPressed: () {
                     _getLocalImage(authBloc);
@@ -208,11 +226,11 @@ class CurvedShape extends StatelessWidget {
         Text(
           "${user.firstName}",
           style: TextStyle(
-              fontSize: 18.0, color: Colors.grey[800], fontWeight: FontWeight.bold),
+              fontSize: 18.0, color: WTColors.darkGrey, fontWeight: FontWeight.bold),
         ),
         Text(
           "User since " + DateFormat.yMMM().format(user.createdAt.toDate()),
-          style: TextStyle(color: Colors.grey[800].withOpacity(0.7)),
+          style: TextStyle(color: WTColors.darkGrey.withOpacity(0.7)),
         ),
         SizedBox(height: 40),
       ],

@@ -13,12 +13,12 @@ class WeightInitialState extends WeightState {
 
 class AddingWeightState extends WeightState {
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [];
 }
 
 class AddedWeightState extends WeightState {
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [];
 }
 
 class WeightChangedState extends WeightState {

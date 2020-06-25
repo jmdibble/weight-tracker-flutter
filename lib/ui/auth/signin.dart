@@ -7,6 +7,7 @@ import 'package:weighttrackertwo/services/auth_service.dart';
 import 'package:weighttrackertwo/ui/auth/reset_password.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/validators/email_validator.dart';
 import 'package:weighttrackertwo/ui/validators/password_validator.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';
@@ -145,7 +146,7 @@ class _SigninPageState extends State<SigninPage> {
                             color: Theme.of(context).primaryColor,
                             child: Text(
                               "Sign in",
-                              style: TextStyle(color: Colors.grey[800]),
+                              style: TextStyle(color: WTColors.darkGrey),
                             ),
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
@@ -182,7 +183,7 @@ class _SigninPageState extends State<SigninPage> {
                                 SizedBox(width: 10),
                                 Text(
                                   "Sign in with Google",
-                                  style: TextStyle(color: Colors.grey[800]),
+                                  style: TextStyle(color: WTColors.darkGrey),
                                 ),
                                 SizedBox(width: 10),
                               ],

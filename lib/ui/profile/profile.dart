@@ -14,6 +14,7 @@ import 'package:weighttrackertwo/ui/home/home.dart';
 import 'package:weighttrackertwo/ui/profile/change_email.dart';
 import 'package:weighttrackertwo/ui/profile/change_details.dart';
 import 'package:weighttrackertwo/ui/profile/change_password.dart';
+import 'package:weighttrackertwo/ui/profile/notifications.dart';
 import 'package:weighttrackertwo/ui/profile/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/ui/weight_tracker.dart';

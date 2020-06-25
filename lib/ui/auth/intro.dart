@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:weighttrackertwo/ui/auth/signin.dart';
 import 'package:weighttrackertwo/ui/auth/signup.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
@@ -133,7 +134,7 @@ class CurvedShape extends StatelessWidget {
                     },
                     label: "Sign up",
                     labelStyle: TextStyle(color: Theme.of(context).primaryColor),
-                    color: Colors.grey[800],
+                    color: WTColors.darkGrey,
                   ),
                 ),
               ),
@@ -150,7 +151,7 @@ class CurvedShape extends StatelessWidget {
                 },
                 child: Text(
                   "Sign in",
-                  style: TextStyle(color: Colors.grey[800]),
+                  style: TextStyle(color: WTColors.darkGrey),
                 ),
               ),
               SizedBox(height: 50),

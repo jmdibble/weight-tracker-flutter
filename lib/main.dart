@@ -4,6 +4,7 @@ import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/bloc/notifications/notifications_bloc.dart';
 import 'package:weighttrackertwo/services/auth_service.dart';
 import 'package:weighttrackertwo/services/get_it_service.dart';
 import 'package:weighttrackertwo/services/notifications_service.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (ctx) => WeightBloc(),
+        ),
+        BlocProvider(
+          create: (ctx) => NotificationsBloc(),
         )
       ],
       child: MaterialApp(
