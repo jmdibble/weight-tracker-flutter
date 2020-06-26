@@ -12,6 +12,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   Stream<NotificationsState> mapEventToState(NotificationsEvent event) async* {
     if (event is ReceivedNotificationEvent) {
       yield ReceivedNotificationState();
+    } else if (event is ReadNotificationsEvent) {
+      yield ReadNotificationsState();
     }
   }
 }

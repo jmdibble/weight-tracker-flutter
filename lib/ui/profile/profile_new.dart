@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_event.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_state.dart';
+import 'package:weighttrackertwo/bloc/notifications/notifications_bloc.dart';
+import 'package:weighttrackertwo/bloc/notifications/notifications_state.dart';
 import 'package:weighttrackertwo/models/user_model.dart';
+import 'package:weighttrackertwo/services/notifications_service.dart';
 import 'package:weighttrackertwo/ui/auth/loading.dart';
 import 'package:weighttrackertwo/ui/profile/change_details.dart';
 import 'package:weighttrackertwo/ui/profile/change_email.dart';
@@ -29,16 +33,50 @@ class ProfileNewPage extends StatelessWidget {
 //        title: "Profile",
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            color: WTColors.darkGrey,
-            onPressed: () {
-              Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.upToDown,
-                  child: NotificationsPage(),
-                ),
+          BlocBuilder<NotificationsBloc, NotificationsState>(
+            builder: (ctx, state) {
+              bool hasNotifications = false;
+              GetIt.I<NotificationsService>().notifications.forEach((key, value) {
+                if (value == false) {
+                  hasNotifications = true;
+                }
+              });
+
+              return Stack(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.notifications),
+                    color: WTColors.darkGrey,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.upToDown,
+                          child: NotificationsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  hasNotifications
+                      ? Positioned(
+                          bottom: 35,
+                          right: 0,
+                          left: 20,
+                          child: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: WTColors.limeGreen,
+                            child: CircleAvatar(
+                              radius: 6,
+                              backgroundColor: Colors.red,
+//                        child: Text(
+//                          "4",
+//                          style: TextStyle(fontSize: 8, color: Colors.white),
+//                        ),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ],
               );
             },
           ),
@@ -140,7 +178,7 @@ class CurvedShape extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       title: Text("Change password"),
-                      subtitle: Text("********"),
+                      subtitle: Text("Current password required"),
                       trailing: Icon(
                         Icons.chevron_right,
                         color: Colors.grey,

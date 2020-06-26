@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:weighttrackertwo/models/weight_model.dart';
 
@@ -13,8 +15,10 @@ class WeightAddedEvent extends WeightEvent {
   int lbs;
   int kg;
   DateTime date;
+  String comment;
+  File imageFile;
 
-  WeightAddedEvent({this.st, this.lbs, this.kg, this.date});
+  WeightAddedEvent({this.st, this.lbs, this.kg, this.date, this.comment, this.imageFile});
 
   @override
   List<Object> get props => [];
@@ -27,6 +31,7 @@ class WeightChangedEvent extends WeightEvent {
 
 class WeightRemovedEvent extends WeightEvent {
   Weight weight;
+
   WeightRemovedEvent({this.weight});
 
   @override

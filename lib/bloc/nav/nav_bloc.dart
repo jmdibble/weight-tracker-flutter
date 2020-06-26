@@ -9,7 +9,8 @@ class NavBloc extends Bloc<NavEvent, NavState> {
   @override
   Stream<NavState> mapEventToState(NavEvent event) async* {
     if (event is ChangeNavEvent) {
-      yield ShowNavState(currentIndex: event.index);
+      print("updating nav");
+      yield ShowNavState(currentIndex: event.index, dateTime: event.dateTime);
     }
   }
 }

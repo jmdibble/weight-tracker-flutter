@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:weighttrackertwo/bloc/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_bloc.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_state.dart';
+import 'package:weighttrackertwo/bloc/notifications/notifications_bloc.dart';
+import 'package:weighttrackertwo/services/notifications_service.dart';
 import 'package:weighttrackertwo/ui/profile/profile.dart';
 import 'package:weighttrackertwo/ui/profile/profile_new.dart';
 import 'package:weighttrackertwo/ui/summary/summary.dart';
@@ -14,12 +17,34 @@ import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
 
 enum NavPages { Summary, Weight, Profile }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   Map<NavPages, IconData> navIcons = {
     NavPages.Summary: Icons.pie_chart,
     NavPages.Weight: Icons.timeline,
     NavPages.Profile: Icons.person,
   };
+
+  @override
+  void initState() {
+    GetIt.I.registerSingleton<NotificationsService>(
+      NotificationsService(
+        navBloc: BlocProvider.of<NavBloc>(context),
+        notificationsBloc: BlocProvider.of<NotificationsBloc>(context),
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    GetIt.I.unregister<NotificationsService>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

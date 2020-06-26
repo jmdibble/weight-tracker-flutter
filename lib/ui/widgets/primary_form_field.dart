@@ -13,6 +13,8 @@ class PrimaryFormField extends StatelessWidget {
   TextInputType keyboardType;
   String initialValue;
   void Function() onTap;
+  int maxLines;
+  int minLines;
 
   PrimaryFormField({
     Key key,
@@ -25,6 +27,8 @@ class PrimaryFormField extends StatelessWidget {
     this.keyboardType,
     this.initialValue,
     this.onTap,
+    this.maxLines = 1,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -46,6 +50,8 @@ class PrimaryFormField extends StatelessWidget {
       ),
       validator: validator,
       onTap: onTap,
+      maxLines: maxLines,
+      minLines: minLines,
     );
   }
 }

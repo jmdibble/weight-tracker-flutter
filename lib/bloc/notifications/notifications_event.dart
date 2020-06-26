@@ -11,3 +11,8 @@ class ReceivedNotificationEvent extends NotificationsEvent {
   @override
   List<Object> get props => [];
 }
+
+class ReadNotificationsEvent extends NotificationsEvent {
+  @override
+  List<Object> get props => [];
+}

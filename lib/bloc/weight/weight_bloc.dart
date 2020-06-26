@@ -24,7 +24,8 @@ class WeightBloc extends Bloc<WeightEvent, WeightState> {
     } else if (event is WeightAddedEvent) {
       try {
         yield AddingWeightState();
-        await weightService.addWeight(event.st, event.lbs, event.kg, event.date);
+        await weightService.addWeight(
+            event.st, event.lbs, event.kg, event.date, event.comment, event.imageFile);
         var weight = await weightService.getWeight();
         yield AddedWeightState();
         yield WeightChangedState(weight: weight);

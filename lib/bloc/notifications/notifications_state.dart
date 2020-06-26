@@ -11,3 +11,8 @@ class ReceivedNotificationState extends NotificationsState {
   @override
   List<Object> get props => [];
 }
+
+class ReadNotificationsState extends NotificationsState {
+  @override
+  List<Object> get props => [];
+}

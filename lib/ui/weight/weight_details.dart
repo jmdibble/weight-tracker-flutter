@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weighttrackertwo/models/weight_model.dart';
 import 'package:intl/intl.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/weight/edit_weight.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 
@@ -18,14 +19,34 @@ class WeightDetails extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 50),
+            currentWeight.pictureUrl != null
+                ? Container(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image(
+                      fit: BoxFit.fitWidth,
+                      image: NetworkImage(currentWeight.pictureUrl),
+                    ),
+                  )
+                : Container(
+                    color: WTColors.darkGrey,
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    child: Icon(Icons.photo),
+                  ),
+            SizedBox(height: 10),
             Text(
               currentWeight.weightSt.toString() +
                   " st " +
                   currentWeight.weightLb.toString() +
                   " lbs ",
               style: TextStyle(fontSize: 24.0),
-            )
+            ),
+            SizedBox(height: 10),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(currentWeight.comment != null ? currentWeight.comment : ""),
+            ),
           ],
         ),
       ),

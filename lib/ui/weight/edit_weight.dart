@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_event.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
 import 'package:weighttrackertwo/models/weight_model.dart';
-import 'package:weighttrackertwo/ui/home/home.dart';
-import 'package:weighttrackertwo/ui/weight_tracker.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_button.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
@@ -15,6 +17,7 @@ import 'package:intl/intl.dart';
 
 class EditWeight extends StatefulWidget {
   Weight currentWeight;
+
   EditWeight({this.currentWeight});
 
   @override
@@ -26,6 +29,8 @@ class _EditWeightState extends State<EditWeight> {
   TextEditingController lbController = new TextEditingController();
   DateTime _dateTime;
   Weight currentWeight;
+  String pictureUrl;
+  File localImage;
 
   _EditWeightState({this.currentWeight});
 
@@ -35,6 +40,7 @@ class _EditWeightState extends State<EditWeight> {
     stController.text = currentWeight.weightSt.toString();
     lbController.text = currentWeight.weightLb.toString();
     _dateTime = currentWeight.date.toDate();
+    pictureUrl = currentWeight.pictureUrl;
   }
 
   @override
@@ -60,9 +66,46 @@ class _EditWeightState extends State<EditWeight> {
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
+              localImage == null
+                  ? CircleAvatar(
+                      radius: 31,
+                      backgroundColor: WTColors.limeGreen,
+                      child: CircleAvatar(
+                        radius: 30,
+                        foregroundColor: WTColors.limeGreen,
+                        backgroundColor: WTColors.backgroundGrey,
+                        child: IconButton(
+                          icon: Icon(Icons.photo),
+                          onPressed: () {
+                            _getLocalImage(bloc);
+                          },
+                        ),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                          child: Image(
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            image: FileImage(localImage),
+                          ),
+                        ),
+                        FlatButton(
+                          child: Text(
+                            "Remove",
+                            style: TextStyle(color: WTColors.limeGreen),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              localImage = null;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
               Row(
                 children: <Widget>[
                   Expanded(
@@ -197,5 +240,16 @@ class _EditWeightState extends State<EditWeight> {
             ],
           );
         });
+  }
+
+  _getLocalImage(WeightBloc bloc) async {
+    ImagePicker imagePicker = ImagePicker();
+
+    final pickedFile = await imagePicker.getImage(
+        source: ImageSource.gallery, imageQuality: 90, maxWidth: 1000);
+
+    setState(() {
+      localImage = File(pickedFile.path);
+    });
   }
 }

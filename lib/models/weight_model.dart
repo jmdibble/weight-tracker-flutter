@@ -6,6 +6,8 @@ class Weight {
   int weightSt;
   int weightLb;
   Timestamp date;
+  String comment;
+  String pictureUrl;
 
   Weight();
 
@@ -15,6 +17,8 @@ class Weight {
     weightSt = data["weightSt"];
     weightLb = data["weightLb"];
     date = data["date"];
+    comment = data["comment"];
+    pictureUrl = data["pictureUrl"];
   }
 
   Map<String, dynamic> toMap() {
@@ -24,6 +28,8 @@ class Weight {
       "weightSt": weightSt,
       "weightLb": weightLb,
       "date": date,
+      "pictureUrl": pictureUrl,
+      "comment": comment,
     };
   }
 }

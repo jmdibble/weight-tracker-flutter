@@ -11,7 +11,6 @@ import 'package:weighttrackertwo/ui/home/home.dart';
 import 'package:page_transition/page_transition.dart';
 
 class WeightTracker extends StatelessWidget {
-  NotificationsService get notificationsService => GetIt.I<NotificationsService>();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
@@ -26,7 +25,6 @@ class WeightTracker extends StatelessWidget {
         } else if (state is AuthFailState) {
           return SigninPage();
         } else if (state is AuthorisedState) {
-          notificationsService.initialise();
           return HomePage();
         }
       },
