@@ -19,7 +19,7 @@ class WeightDetails extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            currentWeight.pictureUrl != null
+            currentWeight.pictureUrl != null && currentWeight.pictureUrl != ""
                 ? Container(
                     height: 300,
                     width: MediaQuery.of(context).size.width,

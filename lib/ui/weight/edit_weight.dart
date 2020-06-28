@@ -27,6 +27,7 @@ class EditWeight extends StatefulWidget {
 class _EditWeightState extends State<EditWeight> {
   TextEditingController stController = new TextEditingController();
   TextEditingController lbController = new TextEditingController();
+  TextEditingController commentController = new TextEditingController();
   DateTime _dateTime;
   Weight currentWeight;
   String pictureUrl;
@@ -40,6 +41,7 @@ class _EditWeightState extends State<EditWeight> {
     stController.text = currentWeight.weightSt.toString();
     lbController.text = currentWeight.weightLb.toString();
     _dateTime = currentWeight.date.toDate();
+    commentController.text = currentWeight.comment;
     pictureUrl = currentWeight.pictureUrl;
   }
 
@@ -66,7 +68,8 @@ class _EditWeightState extends State<EditWeight> {
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: <Widget>[
-              localImage == null
+              (pictureUrl == "" && localImage == null) ||
+                      (pictureUrl == null && localImage == null)
                   ? CircleAvatar(
                       radius: 31,
                       backgroundColor: WTColors.limeGreen,
@@ -168,8 +171,15 @@ class _EditWeightState extends State<EditWeight> {
                   ),
                 ],
               ),
+              PrimaryFormField(
+                controller: commentController,
+                minLines: 1,
+                maxLines: 5,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(labelText: "Comments"),
+              ),
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               BlocBuilder<WeightBloc, WeightState>(
                 builder: (ctx, state) {
@@ -180,10 +190,17 @@ class _EditWeightState extends State<EditWeight> {
                       width: MediaQuery.of(context).size.width,
                       child: PrimaryButton(
                         label: "Submit changes",
-                        onPressed: () {
-                          stController.text = "";
-                          lbController.text = "";
-                          _dateTime = null;
+                        onPressed: () async {
+                          await bloc.add(
+                            WeightEditEvent(
+                                id: currentWeight.id,
+                                st: int.parse(stController.text),
+                                lbs: int.parse(lbController.text),
+                                comment: commentController.text,
+                                date: DateTime.now(),
+                                pictureUrl: pictureUrl,
+                                imageFile: localImage),
+                          );
                         },
                       ),
                     );

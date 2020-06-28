@@ -52,8 +52,8 @@ class NotificationsPage extends StatelessWidget {
                       NotificationModel key =
                           notificationsService.notifications.keys.elementAt(i);
                       return ListTile(
-                        title: Text(key.notification.title ?? ""),
-                        subtitle: Text(key.notification.body ?? ""),
+                        title: Text(key.notification.title ?? "No title"),
+                        subtitle: Text(key.notification.body ?? "No text"),
                         trailing: IconButton(
                           onPressed: () {},
                           icon: Icon(

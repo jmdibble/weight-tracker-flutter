@@ -24,6 +24,30 @@ class WeightAddedEvent extends WeightEvent {
   List<Object> get props => [];
 }
 
+class WeightEditEvent extends WeightEvent {
+  String id;
+  int st;
+  int lbs;
+  int kg;
+  DateTime date;
+  String comment;
+  File imageFile;
+  String pictureUrl;
+
+  WeightEditEvent(
+      {this.id,
+      this.st,
+      this.lbs,
+      this.kg,
+      this.date,
+      this.comment,
+      this.imageFile,
+      this.pictureUrl});
+
+  @override
+  List<Object> get props => [];
+}
+
 class WeightChangedEvent extends WeightEvent {
   @override
   List<Object> get props => [];

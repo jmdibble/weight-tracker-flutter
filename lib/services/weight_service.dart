@@ -10,7 +10,7 @@ class WeightService {
   Future<List<Weight>> getWeight() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser user = await auth.currentUser();
-    final uid = user.uid;
+    final String uid = user.uid;
 
     List<Weight> weightMeasurements = [];
 
@@ -29,10 +29,16 @@ class WeightService {
   }
 
   Future<void> addWeight(
-      int st, int lbs, int kg, DateTime date, String comment, dynamic localImage) async {
+    int st,
+    int lbs,
+    int kg,
+    DateTime date,
+    String comment,
+    dynamic localImage,
+  ) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    final uid = user.uid;
+    final FirebaseUser firebaseUser = await auth.currentUser();
+    final String uid = firebaseUser.uid;
 
     DocumentReference docRef = await Firestore.instance
         .collection("users")
@@ -54,13 +60,48 @@ class WeightService {
 
     if (localImage != null) {
       await uploadWeightPicture(localImage, docId);
+    } else {}
+  }
+
+  Future<void> editWeight(
+    String docId,
+    int st,
+    int lbs,
+    int kg,
+    DateTime date,
+    String comment,
+    dynamic localImage,
+    String pictureUrl,
+  ) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser firebaseUser = await auth.currentUser();
+    final String uid = firebaseUser.uid;
+
+    DocumentReference docRef = await Firestore.instance
+        .collection("users")
+        .document(uid)
+        .collection("weights")
+        .document(docId);
+
+    docRef.setData({
+      "id": docId,
+      "weightSt": st,
+      "weightLb": lbs,
+      "weightKg": kg,
+      "date": date,
+      "comment": comment ?? "",
+      "pictureUrl": pictureUrl,
+    });
+
+    if (localImage != null && pictureUrl == "") {
+      await uploadWeightPicture(localImage, docId);
     }
   }
 
   Future<void> uploadWeightPicture(File localImage, String docId) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser firebaseUser = await auth.currentUser();
-    final uid = firebaseUser.uid;
+    final String uid = firebaseUser.uid;
     final dateString = DateTime.now().toString();
 
     if (localImage != null) {
@@ -81,14 +122,14 @@ class WeightService {
           .document(uid)
           .collection("weights")
           .document(docId)
-          .updateData({"pictureUrl": url});
+          .setData({"pictureUrl": url}, merge: true);
     }
   }
 
   Future<void> deleteWeight(Weight weight) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser user = await auth.currentUser();
-    final uid = user.uid;
+    final String uid = user.uid;
 
     await Firestore.instance
         .collection("users")

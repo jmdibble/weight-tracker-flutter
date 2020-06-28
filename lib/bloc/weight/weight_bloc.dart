@@ -32,6 +32,17 @@ class WeightBloc extends Bloc<WeightEvent, WeightState> {
       } catch (e) {
         print(e.toString());
       }
+    } else if (event is WeightEditEvent) {
+      try {
+        yield AddingWeightState();
+        await weightService.editWeight(event.id, event.st, event.lbs, event.kg,
+            event.date, event.comment, event.imageFile, event.pictureUrl);
+        var weight = await weightService.getWeight();
+        yield AddedWeightState();
+        yield WeightChangedState(weight: weight);
+      } catch (e) {
+        print(e.toString());
+      }
     } else if (event is WeightRemovedEvent) {
       await weightService.deleteWeight(event.weight);
       var weight = await weightService.getWeight();
