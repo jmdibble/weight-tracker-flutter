@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    GetIt.I.unregister<NotificationsService>();
+    GetIt.I.unregister<NotificationsService>(instance: NotificationsService());
     super.dispose();
   }
 

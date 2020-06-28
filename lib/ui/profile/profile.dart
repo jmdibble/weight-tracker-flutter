@@ -209,7 +209,7 @@ class ProfilePage extends StatelessWidget {
     File imageFile;
 
     final pickedFile = await imagePicker.getImage(
-        source: ImageSource.gallery, imageQuality: 70, maxWidth: 600);
+        source: ImageSource.gallery, imageQuality: 80, maxWidth: 800);
 
     imageFile = File(pickedFile.path);
 
