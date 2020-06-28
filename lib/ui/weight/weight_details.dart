@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/weight/edit_weight.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
+import 'package:weighttrackertwo/ui/widgets/summary_card.dart';
 
 class WeightDetails extends StatelessWidget {
   Weight currentWeight;
@@ -34,18 +35,37 @@ class WeightDetails extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Icon(Icons.photo),
                   ),
-            SizedBox(height: 10),
-            Text(
-              currentWeight.weightSt.toString() +
-                  " st " +
-                  currentWeight.weightLb.toString() +
-                  " lbs ",
-              style: TextStyle(fontSize: 24.0),
-            ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Container(
-              alignment: Alignment.centerLeft,
-              child: Text(currentWeight.comment != null ? currentWeight.comment : ""),
+              color: WTColors.darkGrey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Weight",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      currentWeight.weightSt.toString() +
+                          " st " +
+                          currentWeight.weightLb.toString() +
+                          " lbs ",
+                      style: TextStyle(fontSize: 24.0),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Divider(),
+                    ),
+                    Text(
+                      "Comment",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 10),
+                    Text(currentWeight.comment ?? ""),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

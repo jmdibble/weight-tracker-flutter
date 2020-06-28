@@ -95,6 +95,8 @@ class WeightService {
 
     if (localImage != null && pictureUrl == "") {
       await uploadWeightPicture(localImage, docId);
+    } else if (localImage != null && pictureUrl == null) {
+      await uploadWeightPicture(localImage, docId);
     }
   }
 

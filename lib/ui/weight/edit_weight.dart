@@ -68,47 +68,7 @@ class _EditWeightState extends State<EditWeight> {
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: <Widget>[
-              (pictureUrl == "" && localImage == null) ||
-                      (pictureUrl == null && localImage == null)
-                  ? CircleAvatar(
-                      radius: 31,
-                      backgroundColor: WTColors.limeGreen,
-                      child: CircleAvatar(
-                        radius: 30,
-                        foregroundColor: WTColors.limeGreen,
-                        backgroundColor: WTColors.backgroundGrey,
-                        child: IconButton(
-                          icon: Icon(Icons.photo),
-                          onPressed: () {
-                            _getLocalImage(bloc);
-                          },
-                        ),
-                      ),
-                    )
-                  : Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300,
-                          child: Image(
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topCenter,
-                            image: FileImage(localImage),
-                          ),
-                        ),
-                        FlatButton(
-                          child: Text(
-                            "Remove",
-                            style: TextStyle(color: WTColors.limeGreen),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              localImage = null;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
+              _buildPhoto(context, bloc),
               Row(
                 children: <Widget>[
                   Expanded(
@@ -197,7 +157,7 @@ class _EditWeightState extends State<EditWeight> {
                                 st: int.parse(stController.text),
                                 lbs: int.parse(lbController.text),
                                 comment: commentController.text,
-                                date: DateTime.now(),
+                                date: _dateTime,
                                 pictureUrl: pictureUrl,
                                 imageFile: localImage),
                           );
@@ -223,6 +183,92 @@ class _EditWeightState extends State<EditWeight> {
         ),
       ),
     );
+  }
+
+  _buildPhoto(BuildContext context, WeightBloc bloc) {
+    if (pictureUrl == "" && localImage == null) {
+      return CircleAvatar(
+        radius: 31,
+        backgroundColor: WTColors.limeGreen,
+        child: CircleAvatar(
+          radius: 30,
+          foregroundColor: WTColors.limeGreen,
+          backgroundColor: WTColors.backgroundGrey,
+          child: IconButton(
+            icon: Icon(Icons.photo),
+            onPressed: () {
+              _getLocalImage(bloc);
+            },
+          ),
+        ),
+      );
+    } else if (pictureUrl == null && localImage == null) {
+      return CircleAvatar(
+        radius: 31,
+        backgroundColor: WTColors.limeGreen,
+        child: CircleAvatar(
+          radius: 30,
+          foregroundColor: WTColors.limeGreen,
+          backgroundColor: WTColors.backgroundGrey,
+          child: IconButton(
+            icon: Icon(Icons.photo),
+            onPressed: () {
+              _getLocalImage(bloc);
+            },
+          ),
+        ),
+      );
+    } else if (pictureUrl != "" && pictureUrl != null) {
+      return Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 300,
+            child: Image(
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter,
+              image: NetworkImage(pictureUrl),
+            ),
+          ),
+          FlatButton(
+            child: Text(
+              "Remove",
+              style: TextStyle(color: WTColors.limeGreen),
+            ),
+            onPressed: () {
+              setState(() {
+                pictureUrl = "";
+              });
+            },
+          ),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 300,
+            child: Image(
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter,
+              image: FileImage(localImage),
+            ),
+          ),
+          FlatButton(
+            child: Text(
+              "Remove",
+              style: TextStyle(color: WTColors.limeGreen),
+            ),
+            onPressed: () {
+              setState(() {
+                localImage = null;
+              });
+            },
+          ),
+        ],
+      );
+    }
   }
 
   _showDialog(BuildContext context, WeightBloc bloc) {
