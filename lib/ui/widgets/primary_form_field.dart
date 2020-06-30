@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:weighttrackertwo/ui/theme/colors.dart';
 
 class PrimaryFormField extends StatelessWidget {
   FocusNode myFocusNode = new FocusNode();
@@ -42,10 +43,10 @@ class PrimaryFormField extends StatelessWidget {
       controller: controller,
       decoration: (decoration ?? InputDecoration()).copyWith(
         labelText: labelText,
-        labelStyle: TextStyle(
-            color: myFocusNode.hasFocus ? Theme.of(context).primaryColor : Colors.grey),
+        labelStyle:
+            TextStyle(color: myFocusNode.hasFocus ? WTColors.limeGreen : Colors.grey),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          borderSide: BorderSide(color: WTColors.limeGreen),
         ),
       ),
       validator: validator,
