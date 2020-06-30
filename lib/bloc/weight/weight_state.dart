@@ -8,7 +8,7 @@ class WeightInitialState extends WeightState {
   WeightInitialState({this.weight});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [weight];
 }
 
 class AddingWeightState extends WeightState {

@@ -66,119 +66,124 @@ class _EditWeightState extends State<EditWeight> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: Column(
-            children: <Widget>[
-              _buildPhoto(context, bloc),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: PrimaryFormField(
-                      controller: stController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "St"),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _buildPhoto(context, bloc),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: PrimaryFormField(
+                        controller: stController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(labelText: "St"),
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 30),
-                  Expanded(
-                    child: PrimaryFormField(
-                      controller: lbController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "Lb"),
+                    SizedBox(width: 30),
+                    Expanded(
+                      child: PrimaryFormField(
+                        controller: lbController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(labelText: "Lb"),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  InkWell(
-                    onTap: () async {
-                      await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      ).then((pickedDate) {
-                        setState(() {
-                          _dateTime = pickedDate;
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () async {
+                        await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        ).then((pickedDate) {
+                          setState(() {
+                            _dateTime = pickedDate;
+                          });
                         });
-                      });
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            _dateTime == null
-                                ? Text(
-                                    'Choose date',
-                                    style: TextStyle(fontSize: 16.0, color: Colors.grey),
-                                  )
-                                : Text(
-                                    DateFormat.yMMMd().format(_dateTime),
-                                    style: TextStyle(fontSize: 16.0),
-                                  ),
-                            Icon(Icons.calendar_today)
-                          ],
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              _dateTime == null
+                                  ? Text(
+                                      'Choose date',
+                                      style:
+                                          TextStyle(fontSize: 16.0, color: Colors.grey),
+                                    )
+                                  : Text(
+                                      DateFormat.yMMMd().format(_dateTime),
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                              Icon(Icons.calendar_today)
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Divider(
-                    height: 10,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-              PrimaryFormField(
-                controller: commentController,
-                minLines: 1,
-                maxLines: 5,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(labelText: "Comments"),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              BlocBuilder<WeightBloc, WeightState>(
-                builder: (ctx, state) {
-                  if (state is AddingWeightState) {
-                    return PrimaryCircularProgress();
-                  } else {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: PrimaryButton(
-                        label: "Submit changes",
-                        onPressed: () async {
-                          await bloc.add(
-                            WeightEditEvent(
+                    Divider(
+                      height: 10,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                PrimaryFormField(
+                  controller: commentController,
+                  minLines: 1,
+                  maxLines: 5,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(labelText: "Comments"),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                BlocBuilder<WeightBloc, WeightState>(
+                  builder: (ctx, state) {
+                    if (state is AddingWeightState) {
+                      return PrimaryCircularProgress();
+                    } else {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: PrimaryButton(
+                          label: "Submit changes",
+                          onPressed: () async {
+                            await bloc.add(
+                              WeightEditEvent(
                                 id: currentWeight.id,
                                 st: int.parse(stController.text),
                                 lbs: int.parse(lbController.text),
                                 comment: commentController.text,
                                 date: _dateTime,
                                 pictureUrl: pictureUrl,
-                                imageFile: localImage),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                },
-              ),
-              BlocListener<WeightBloc, WeightState>(
-                condition: (prev, next) {
-                  next == AddedWeightState;
-                },
-                child: Container(),
-                listener: (prev, next) {
-                  if (next is AddedWeightState) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              )
-            ],
+                                imageFile: localImage,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
+                BlocListener<WeightBloc, WeightState>(
+                  condition: (prev, next) {
+                    next == AddedWeightState;
+                  },
+                  child: Container(),
+                  listener: (prev, next) {
+                    if (next is AddedWeightState) {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

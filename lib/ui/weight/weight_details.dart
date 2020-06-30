@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
+import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
 import 'package:weighttrackertwo/models/weight_model.dart';
 import 'package:intl/intl.dart';
 import 'package:weighttrackertwo/ui/theme/colors.dart';
@@ -17,7 +20,7 @@ class WeightDetails extends StatelessWidget {
       appBar: PrimaryAppBar(
         title: DateFormat.yMMMd().format(currentWeight.date.toDate()),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             currentWeight.pictureUrl != null && currentWeight.pictureUrl != ""
