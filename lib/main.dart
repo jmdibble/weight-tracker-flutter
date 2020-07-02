@@ -53,6 +53,5 @@ class MyApp extends StatelessWidget {
 /// todos
 // todo: finish notifications page
 // todo: translate errors (half)
-// todo: cursor color
 // todo: add BMI
 // todo: get dates on graph tooltips
