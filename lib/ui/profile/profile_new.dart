@@ -13,15 +13,11 @@ import 'package:weighttrackertwo/bloc/notifications/notifications_bloc.dart';
 import 'package:weighttrackertwo/bloc/notifications/notifications_state.dart';
 import 'package:weighttrackertwo/models/user_model.dart';
 import 'package:weighttrackertwo/services/notifications_service.dart';
-import 'package:weighttrackertwo/ui/auth/loading.dart';
-import 'package:weighttrackertwo/ui/profile/change_details.dart';
-import 'package:weighttrackertwo/ui/profile/change_email.dart';
-import 'package:weighttrackertwo/ui/profile/change_password.dart';
+import 'package:weighttrackertwo/ui/profile/account.dart';
+import 'package:weighttrackertwo/ui/profile/bmi.dart';
 import 'package:weighttrackertwo/ui/theme/colors.dart';
-import 'package:weighttrackertwo/ui/weight_tracker.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_circular_progress.dart';
-import 'package:weighttrackertwo/ui/widgets/primary_dialog.dart';
 
 import 'notifications.dart';
 
@@ -36,7 +32,9 @@ class ProfileNewPage extends StatelessWidget {
           BlocBuilder<NotificationsBloc, NotificationsState>(
             builder: (ctx, state) {
               bool hasNotifications = false;
-              GetIt.I<NotificationsService>().notifications.forEach((key, value) {
+              GetIt.I<NotificationsService>()
+                  .notifications
+                  .forEach((key, value) {
                 if (value == false) {
                   hasNotifications = true;
                 }
@@ -127,74 +125,38 @@ class CurvedShape extends StatelessWidget {
                     ),
                     SizedBox(height: 50),
                     ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return ChangeEmail(user: user);
-                            },
-                          ),
-                        );
-                      },
                       leading: Icon(
-                        Icons.alternate_email,
+                        Icons.assessment,
                         color: Colors.grey,
                       ),
-                      title: Text("Change email"),
-                      subtitle: Text("${user.email}"),
+                      title: Text("BMI"),
+                      subtitle: Text("Add your height to calculate your BMI"),
                       trailing: Icon(
                         Icons.chevron_right,
                         color: Colors.grey,
                       ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: BMIPage()));
+                      },
                     ),
                     ListTile(
-                      onTap: () {
-                        print(user.firstName);
-                        _navigateToDetails(context, user);
-                      },
-                      leading: Icon(
-                        Icons.person_outline,
-                        color: Colors.grey,
-                      ),
-                      title: Text("Change details"),
-                      subtitle: Text("${user.firstName} ${user.lastName}"),
+                      title: Text("Account"),
+                      subtitle: Text("Change your account details"),
+                      leading: Icon(Icons.account_circle, color: Colors.grey),
                       trailing: Icon(
                         Icons.chevron_right,
                         color: Colors.grey,
                       ),
-                    ),
-                    ListTile(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return ChangePassword(user: user);
-                            },
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        Icons.lock_outline,
-                        color: Colors.grey,
-                      ),
-                      title: Text("Change password"),
-                      subtitle: Text("Current password required"),
-                      trailing: Icon(
-                        Icons.chevron_right,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.exit_to_app,
-                        color: Colors.red,
-                      ),
-                      title: Text(
-                        "Logout",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      onTap: () async {
-                        _showSignoutDialog(context, authBloc);
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: AccountSettings()));
                       },
                     ),
                   ],
@@ -264,7 +226,9 @@ class CurvedShape extends StatelessWidget {
         Text(
           "${user.firstName}",
           style: TextStyle(
-              fontSize: 18.0, color: WTColors.darkGrey, fontWeight: FontWeight.bold),
+              fontSize: 18.0,
+              color: WTColors.darkGrey,
+              fontWeight: FontWeight.bold),
         ),
         Text(
           "User since " + DateFormat.yMMM().format(user.createdAt.toDate()),
@@ -289,49 +253,6 @@ class CurvedShape extends StatelessWidget {
         UploadDisplayPictureEvent(localFile: imageFile),
       );
     }
-  }
-
-  _navigateToDetails(BuildContext context, User user) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return ChangeName(user: user);
-      }),
-    );
-  }
-
-  _showSignoutDialog(BuildContext context, AuthBloc authBloc) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return PrimaryDialog(
-          content: Text("Are you sure you want to logout?"),
-          actions: [
-            FlatButton(
-              child: Text(
-                "Cancel",
-                style: TextStyle(color: Colors.grey),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            FlatButton(
-              onPressed: () async {
-                await authBloc.add(SignoutEvent());
-                await Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade, child: WeightTracker()));
-              },
-              child: Text(
-                "Logout",
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 }
 
