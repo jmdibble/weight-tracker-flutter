@@ -129,7 +129,7 @@ class CurvedShape extends StatelessWidget {
                         Icons.assessment,
                         color: Colors.grey,
                       ),
-                      title: Text("BMI"),
+                      title: Text("Height"),
                       subtitle: Text("Add your height to calculate your BMI"),
                       trailing: Icon(
                         Icons.chevron_right,

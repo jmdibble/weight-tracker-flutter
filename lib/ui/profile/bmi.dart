@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighttrackertwo/bloc/height/height_bloc.dart';
+import 'package:weighttrackertwo/bloc/height/height_event.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
@@ -26,14 +28,11 @@ class _BMIPageState extends State<BMIPage> {
 
   @override
   Widget build(BuildContext context) {
+    final HeightBloc bloc = BlocProvider.of<HeightBloc>(context);
     print(bmi);
-    ft = int.parse(feetController.text != "" ? feetController.text : "0");
-    inches =
-        int.parse(inchesController.text != "" ? inchesController.text : "0");
-
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "Your BMI",
+        title: "Your height",
       ),
       body: BlocBuilder<WeightBloc, WeightState>(
         builder: (ctx, state) {
@@ -62,12 +61,24 @@ class _BMIPageState extends State<BMIPage> {
                     ],
                   ),
                   FlatButton(
-                    child: Text("Calc"),
+                    child: Text("Save"),
                     onPressed: () {
-                      _calcBMI(ft, inches, 8, 9);
+                      _calcBMI(int.parse(feetController.text),
+                          int.parse(inchesController.text), 10, 9);
                     },
                   ),
                   _showBMI(bmi),
+                  FlatButton(
+                    child: Text("Save height"),
+                    onPressed: () {
+                      bloc.add(
+                        HeightAddedEvent(
+                          feet: int.parse(feetController.text),
+                          inches: int.parse(inchesController.text),
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             );

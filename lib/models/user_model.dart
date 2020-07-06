@@ -7,6 +7,8 @@ class User {
   String email;
   String displayUrl;
   Timestamp createdAt;
+  int heightFt;
+  int heightInches;
 
   User();
 
@@ -17,6 +19,8 @@ class User {
     email = data["email"];
     displayUrl = data["displayUrl"];
     createdAt = data["createdAt"];
+    heightFt = data["heightFt"];
+    heightInches = data["heightInches"];
   }
 
   Map<String, dynamic> toMap() {
@@ -27,6 +31,8 @@ class User {
       "email": email,
       "displayUrl": displayUrl,
       "createdAt": createdAt,
+      "heightInches": heightInches,
+      "heightFt": heightFt,
     };
   }
 }

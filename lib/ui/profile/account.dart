@@ -60,7 +60,7 @@ class AccountSettings extends StatelessWidget {
                     Icons.person_outline,
                     color: Colors.grey,
                   ),
-                  title: Text("Change details"),
+                  title: Text("Personal details"),
                   subtitle: Text("${user.firstName} ${user.lastName}"),
                   trailing: Icon(
                     Icons.chevron_right,
