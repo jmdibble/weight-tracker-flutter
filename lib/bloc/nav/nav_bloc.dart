@@ -1,6 +1,6 @@
+import 'package:bloc/bloc.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_event.dart';
 import 'package:weighttrackertwo/bloc/nav/nav_state.dart';
-import 'package:bloc/bloc.dart';
 
 class NavBloc extends Bloc<NavEvent, NavState> {
   @override
@@ -9,7 +9,6 @@ class NavBloc extends Bloc<NavEvent, NavState> {
   @override
   Stream<NavState> mapEventToState(NavEvent event) async* {
     if (event is ChangeNavEvent) {
-      print("updating nav");
       yield ShowNavState(currentIndex: event.index, dateTime: event.dateTime);
     }
   }
