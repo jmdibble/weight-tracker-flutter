@@ -149,8 +149,9 @@ class SummaryPage extends StatelessWidget {
                                     child: Row(
                                       children: <Widget>[
                                         SummaryCard(
-                                          title: "BMI",
-                                          subtitle: state.bmi.toString(),
+                                          title:
+                                              "BMI: ${state.bmi != null ? state.bmi.roundToDouble() : ""}",
+                                          subtitle: _showBMI(state),
                                           subtitleColor: WTColors.limeGreen,
                                         ),
                                       ],
@@ -178,6 +179,23 @@ class SummaryPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _showBMI(HeightAddedState state) {
+    double bmi = state.bmi;
+    print(bmi.roundToDouble());
+
+    if (bmi == double.infinity || bmi == null) {
+      return "Set weight in profile";
+    } else if (bmi > 30) {
+      return "Obese";
+    } else if (bmi < 30 && bmi >= 25) {
+      return "Overweight";
+    } else if (bmi < 25 && bmi >= 18.5) {
+      return "Normal";
+    } else {
+      return "Underweight";
+    }
   }
 
   _buildCoords(BuildContext context, dynamic state) {
