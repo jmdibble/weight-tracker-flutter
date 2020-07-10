@@ -130,10 +130,13 @@ class AccountSettings extends StatelessWidget {
             FlatButton(
               onPressed: () async {
                 authBloc.add(SignoutEvent());
-                await Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade, child: WeightTracker()));
+                Navigator.pop(context);
+                Navigator.pop(context);
+
+//                await Navigator.pushReplacement(
+//                    context,
+//                    PageTransition(
+//                        type: PageTransitionType.fade, child: WeightTracker()));
               },
               child: Text(
                 "Logout",

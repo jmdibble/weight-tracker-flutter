@@ -4,6 +4,7 @@ import 'package:weighttrackertwo/bloc/height/height_bloc.dart';
 import 'package:weighttrackertwo/bloc/height/height_event.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_state.dart';
+import 'package:weighttrackertwo/services/height_service.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_form_field.dart';
 
@@ -61,7 +62,7 @@ class _BMIPageState extends State<BMIPage> {
                     ],
                   ),
                   FlatButton(
-                    child: Text("Save"),
+                    child: Text("Calculate"),
                     onPressed: () {
                       _calcBMI(int.parse(feetController.text),
                           int.parse(inchesController.text), 10, 9);
@@ -78,7 +79,14 @@ class _BMIPageState extends State<BMIPage> {
                         ),
                       );
                     },
-                  )
+                  ),
+                  FlatButton(
+                    child: Text("Get BMI"),
+                    onPressed: () {
+                      HeightService heightService = HeightService();
+                      heightService.calcBMI();
+                    },
+                  ),
                 ],
               ),
             );

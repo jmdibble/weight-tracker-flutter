@@ -16,8 +16,9 @@ class HeightBloc extends Bloc<HeightEvent, HeightState> {
   @override
   Stream<HeightState> mapEventToState(HeightEvent event) async* {
     if (event is HeightAddedEvent) {
-      heightService.addHeight(event.feet, event.inches);
-      yield HeightAddedState();
+      await heightService.addHeight(event.feet, event.inches);
+      double bmi = await heightService.calcBMI();
+      yield HeightAddedState(bmi: bmi);
     }
   }
 }

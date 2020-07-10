@@ -153,10 +153,11 @@ class CurvedShape extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: AccountSettings()));
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: AccountSettings()),
+                        );
                       },
                     ),
                   ],

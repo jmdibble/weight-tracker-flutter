@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
+import 'package:weighttrackertwo/bloc/height/height_bloc.dart';
+import 'package:weighttrackertwo/bloc/height/height_state.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_event.dart';
@@ -73,7 +75,8 @@ class SummaryPage extends StatelessWidget {
                                 child: Text(
                                   "Your last 3 months",
                                   style: TextStyle(
-                                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               SizedBox(height: 30),
@@ -88,25 +91,29 @@ class SummaryPage extends StatelessWidget {
                                 child: Text(
                                   "Your stats",
                                   style: TextStyle(
-                                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               SizedBox(height: 10),
                               Container(
                                 height: 100,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     SummaryCard(
                                       title: "Recent weight",
                                       subtitle: currentWeight,
-                                      subtitleColor: Theme.of(context).primaryColor,
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
                                     ),
                                     SizedBox(width: 10),
                                     SummaryCard(
                                       title: "Last gain/loss",
                                       subtitle: "$lastGain lb",
-                                      subtitleColor: Theme.of(context).primaryColor,
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
                                     ),
                                   ],
                                 ),
@@ -115,21 +122,44 @@ class SummaryPage extends StatelessWidget {
                               Container(
                                 height: 100,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     SummaryCard(
                                       title: "First measurement",
                                       subtitle: firstMeasurement,
-                                      subtitleColor: Theme.of(context).primaryColor,
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
                                     ),
                                     SizedBox(width: 10),
                                     SummaryCard(
                                         title: "Total gain/loss",
                                         subtitle: "$totalGain lb",
-                                        subtitleColor: Theme.of(context).primaryColor),
+                                        subtitleColor:
+                                            Theme.of(context).primaryColor),
                                   ],
                                 ),
-                              )
+                              ),
+                              SizedBox(height: 10),
+                              BlocBuilder<HeightBloc, HeightState>(
+                                  builder: (ctx, state) {
+                                if (state is HeightAddedState) {
+                                  return Container(
+                                    height: 100,
+                                    child: Row(
+                                      children: <Widget>[
+                                        SummaryCard(
+                                          title: "BMI",
+                                          subtitle: state.bmi.toString(),
+                                          subtitleColor: WTColors.limeGreen,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              }),
                             ],
                           );
                         }
@@ -195,7 +225,8 @@ class SummaryPage extends StatelessWidget {
     }
 
     var minx =
-        (Jiffy(state.weight[renderList.length - 1].date.toDate()).dayOfYear).toDouble();
+        (Jiffy(state.weight[renderList.length - 1].date.toDate()).dayOfYear)
+            .toDouble();
     var maxx = (Jiffy(state.weight[0].date.toDate()).dayOfYear).toDouble();
 
     var miny = smallestWeight - 1.0;

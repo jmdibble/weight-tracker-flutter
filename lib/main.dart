@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
 }
 
 /// todos
+// todo: add widget. for the stateful widgets
 // todo: finish notifications page
 // todo: translate errors (half)
 // todo: add BMI

@@ -29,12 +29,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    GetIt.I.registerSingleton<NotificationsService>(
-      NotificationsService(
-        navBloc: BlocProvider.of<NavBloc>(context),
-        notificationsBloc: BlocProvider.of<NotificationsBloc>(context),
-      ),
-    );
+    if (!GetIt.I.isRegistered<NotificationsService>()) {
+      GetIt.I.registerSingleton<NotificationsService>(
+        NotificationsService(
+            notificationsBloc: BlocProvider.of<NotificationsBloc>(context)),
+      );
+    }
     super.initState();
   }
 
@@ -50,7 +50,8 @@ class _HomePageState extends State<HomePage> {
 
     final List<BottomNavigationBarItem> items = NavPages.values
         .map(
-          (page) => _bottomNavButton(page: page, icon: navIcons[page], context: context),
+          (page) => _bottomNavButton(
+              page: page, icon: navIcons[page], context: context),
         )
         .toList();
 
@@ -96,7 +97,8 @@ class _HomePageState extends State<HomePage> {
             ),
             FlatButton(
               onPressed: () async {
-                await SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+                await SystemChannels.platform
+                    .invokeMethod<void>('SystemNavigator.pop');
 //
               },
               child: Text(
