@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
 import 'package:weighttrackertwo/bloc/height/height_bloc.dart';
+import 'package:weighttrackertwo/bloc/height/height_event.dart';
 import 'package:weighttrackertwo/bloc/height/height_state.dart';
 import 'package:weighttrackertwo/bloc/weight/weight_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,15 +17,16 @@ import 'package:tuple/tuple.dart';
 import 'package:weighttrackertwo/ui/theme/colors.dart';
 import 'package:weighttrackertwo/ui/widgets/primary_appbar.dart';
 import 'package:weighttrackertwo/ui/widgets/summary_card.dart';
+import 'package:weighttrackertwo/ui/widgets/summary_card_widget.dart';
 import 'package:weighttrackertwo/ui/widgets/wt_animation.dart';
 
 class SummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WeightBloc weightBloc = BlocProvider.of<WeightBloc>(context)
-      ..add(
-        LoadWeightEvent(),
-      );
+      ..add(LoadWeightEvent());
+    HeightBloc heightBloc = BlocProvider.of<HeightBloc>(context)
+      ..add(GetHeightEvent());
     return Scaffold(
       appBar: PrimaryAppBar(
         title: "Summary",
@@ -144,18 +146,129 @@ class SummaryPage extends StatelessWidget {
                               BlocBuilder<HeightBloc, HeightState>(
                                   builder: (ctx, state) {
                                 if (state is HeightAddedState) {
-                                  return Container(
-                                    height: 100,
-                                    child: Row(
-                                      children: <Widget>[
-                                        SummaryCard(
-                                          title:
-                                              "BMI: ${state.bmi != null ? state.bmi.roundToDouble() : ""}",
-                                          subtitle: _showBMI(state),
-                                          subtitleColor: WTColors.limeGreen,
+                                  return Column(
+                                    children: <Widget>[
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 158,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            SummaryCardWidget(
+                                              widget: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      state.bmi != null
+                                                          ? "BMI: ${state.bmi.roundToDouble()}"
+                                                          : "BMI: Add height in profile to show BMI",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                          flex: 350,
+                                                          child: Container()),
+                                                      Text(
+                                                        "18.5",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      Expanded(
+                                                          flex: 650,
+                                                          child: Container()),
+                                                      Text(
+                                                        "25",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      Expanded(
+                                                          flex: 500,
+                                                          child: Container()),
+                                                      Text(
+                                                        "30",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      Expanded(
+                                                          flex: 500,
+                                                          child: Text("",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center)),
+                                                    ],
+                                                  ),
+                                                  _bmiGraph(state.bmi),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                          flex: 350,
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              "Under",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          )),
+                                                      Expanded(
+                                                          flex: 650,
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              "Healthy",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          )),
+                                                      Expanded(
+                                                          flex: 500,
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              "Over",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          )),
+                                                      Expanded(
+                                                          flex: 500,
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              "Obese",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   );
                                 } else {
                                   return Container();
@@ -181,21 +294,11 @@ class SummaryPage extends StatelessWidget {
     );
   }
 
-  String _showBMI(HeightAddedState state) {
-    double bmi = state.bmi;
-    print(bmi.roundToDouble());
-
-    if (bmi == double.infinity || bmi == null) {
-      return "Set weight in profile";
-    } else if (bmi > 30) {
-      return "Obese";
-    } else if (bmi < 30 && bmi >= 25) {
-      return "Overweight";
-    } else if (bmi < 25 && bmi >= 18.5) {
-      return "Normal";
-    } else {
-      return "Underweight";
-    }
+  Widget _bmiGraph(double bmi) {
+    return CustomPaint(
+      painter: bmiPainter(bmi: bmi),
+      child: SizedBox(height: 50, child: Container()),
+    );
   }
 
   _buildCoords(BuildContext context, dynamic state) {
@@ -407,5 +510,72 @@ class SummaryPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class bmiPainter extends CustomPainter {
+  double bmi;
+
+  bmiPainter({this.bmi});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var backgroundPaint = Paint()
+      ..color = WTColors.backgroundGrey
+      ..shader = LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.orange,
+            WTColors.limeGreen,
+            WTColors.limeGreen,
+            Colors.red
+          ],
+          stops: [
+            0,
+            0.25,
+            0.4,
+            0.9
+          ]).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
+      ..strokeWidth = 50
+      ..strokeCap = StrokeCap.butt;
+
+    var linePaint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 5
+      ..strokeCap = StrokeCap.round;
+
+    var guideLinePaint = Paint()
+      ..color = WTColors.darkGrey.withOpacity(0.5)
+      ..strokeWidth = 1
+      ..strokeCap = StrokeCap.round;
+
+    // Background
+    canvas.drawLine(Offset(0, 25), Offset(size.width, 25), backgroundPaint);
+
+    // White line
+    if (bmi == null) {
+    } else if (bmi <= 35 && bmi >= 15) {
+      canvas.drawLine(Offset(((bmi - 15) / 20) * size.width, 0),
+          Offset(((bmi - 15) / 20) * size.width, 50), linePaint);
+    } else if (bmi < 15) {
+      canvas.drawLine(Offset(0, 0), Offset(0, 50), linePaint);
+    } else if (bmi > 35) {
+      canvas.drawLine(Offset(((35 - 15) / 20) * size.width, 0),
+          Offset(((35 - 15) / 20) * size.width, 50), linePaint);
+    }
+
+    // Indicator lines
+    canvas.drawLine(Offset(size.width * 0.175, 0),
+        Offset(size.width * 0.175, 50), guideLinePaint);
+    canvas.drawLine(Offset(size.width * 0.5, 0), Offset(size.width * 0.5, 50),
+        guideLinePaint);
+    canvas.drawLine(Offset(size.width * 0.75, 0), Offset(size.width * 0.75, 50),
+        guideLinePaint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

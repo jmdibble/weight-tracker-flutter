@@ -41,10 +41,14 @@ class HeightService {
     int totalLbs;
     double bmi;
 
-    totalInches = ft * 12 + inches;
-    totalLbs = st * 14 + lbs;
+    if (ft == null || inches == null) {
+      bmi == null;
+    } else {
+      totalInches = ft * 12 + inches;
+      totalLbs = st * 14 + lbs;
 
-    bmi = (totalLbs / (totalInches * totalInches)) * 703;
+      bmi = (totalLbs / (totalInches * totalInches)) * 703;
+    }
     return bmi;
   }
 }

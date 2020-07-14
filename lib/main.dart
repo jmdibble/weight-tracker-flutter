@@ -55,8 +55,10 @@ class MyApp extends StatelessWidget {
 }
 
 /// todos
+// todo: fix height bloc
 // todo: add widget. for the stateful widgets
 // todo: finish notifications page
 // todo: translate errors (half)
-// todo: finish weight page
+// todo: finish summary BMI widget
+// todo: make sure bmi works on login
 // todo: get dates on graph tooltips

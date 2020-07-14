@@ -27,20 +27,22 @@ class _HomePageState extends State<HomePage> {
     NavPages.Profile: Icons.person,
   };
 
+  NotificationsService notificationsService;
+
   @override
   void initState() {
+    notificationsService = NotificationsService(
+        notificationsBloc: BlocProvider.of<NotificationsBloc>(context));
+
     if (!GetIt.I.isRegistered<NotificationsService>()) {
-      GetIt.I.registerSingleton<NotificationsService>(
-        NotificationsService(
-            notificationsBloc: BlocProvider.of<NotificationsBloc>(context)),
-      );
+      GetIt.I.registerSingleton<NotificationsService>(notificationsService);
     }
     super.initState();
   }
 
   @override
   void dispose() {
-    GetIt.I.unregister<NotificationsService>(instance: NotificationsService());
+    GetIt.I.unregister<NotificationsService>(instance: notificationsService);
     super.dispose();
   }
 

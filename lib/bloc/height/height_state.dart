@@ -2,6 +2,11 @@ import 'package:equatable/equatable.dart';
 
 abstract class HeightState extends Equatable {}
 
+class HeightInitialState extends HeightState {
+  @override
+  List<Object> get props => [];
+}
+
 class HeightAddedState extends HeightState {
   int heightFt;
   int heightInches;

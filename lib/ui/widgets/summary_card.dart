@@ -22,7 +22,7 @@ class SummaryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                title ?? "",
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class SummaryCard extends StatelessWidget {
                 ),
               ),
               Text(
-                subtitle,
+                subtitle ?? "",
                 style: TextStyle(
                     color: subtitleColor,
                     fontSize: 24.0,

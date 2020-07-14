@@ -200,7 +200,7 @@ class CurvedShape extends StatelessWidget {
                 ),
               ),
             ),
-            new Positioned(
+            Positioned(
               top: 80.0,
               left: 90.0,
               child: Container(
