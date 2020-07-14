@@ -98,51 +98,6 @@ class SummaryPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 10),
-                              Container(
-                                height: 100,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SummaryCard(
-                                      title: "Recent weight",
-                                      subtitle: currentWeight,
-                                      subtitleColor:
-                                          Theme.of(context).primaryColor,
-                                    ),
-                                    SizedBox(width: 10),
-                                    SummaryCard(
-                                      title: "Last gain/loss",
-                                      subtitle: "$lastGain lb",
-                                      subtitleColor:
-                                          Theme.of(context).primaryColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                height: 100,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SummaryCard(
-                                      title: "First measurement",
-                                      subtitle: firstMeasurement,
-                                      subtitleColor:
-                                          Theme.of(context).primaryColor,
-                                    ),
-                                    SizedBox(width: 10),
-                                    SummaryCard(
-                                        title: "Total gain/loss",
-                                        subtitle: "$totalGain lb",
-                                        subtitleColor:
-                                            Theme.of(context).primaryColor),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 10),
                               BlocBuilder<HeightBloc, HeightState>(
                                   builder: (ctx, state) {
                                 if (state is HeightAddedState) {
@@ -274,6 +229,52 @@ class SummaryPage extends StatelessWidget {
                                   return Container();
                                 }
                               }),
+                              SizedBox(height: 10),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SummaryCard(
+                                      title: "Recent weight",
+                                      subtitle: currentWeight,
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
+                                    ),
+                                    SizedBox(width: 10),
+                                    SummaryCard(
+                                      title: "Last gain/loss",
+                                      subtitle: "$lastGain lb",
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SummaryCard(
+                                      title: "First measurement",
+                                      subtitle: firstMeasurement,
+                                      subtitleColor:
+                                          Theme.of(context).primaryColor,
+                                    ),
+                                    SizedBox(width: 10),
+                                    SummaryCard(
+                                        title: "Total gain/loss",
+                                        subtitle: "$totalGain lb",
+                                        subtitleColor:
+                                            Theme.of(context).primaryColor),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 10),
                             ],
                           );
                         }
@@ -551,7 +552,17 @@ class bmiPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     // Background
-    canvas.drawLine(Offset(0, 25), Offset(size.width, 25), backgroundPaint);
+//    canvas.drawLine(Offset(0, 25), Offset(size.width, 25), backgroundPaint);
+    canvas.drawRRect(
+        RRect.fromRectAndRadius(
+            Rect.fromLTWH(
+              0,
+              0,
+              size.width,
+              size.height,
+            ),
+            Radius.circular(8.0)),
+        backgroundPaint);
 
     // White line
     if (bmi == null) {
