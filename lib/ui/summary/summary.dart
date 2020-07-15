@@ -231,7 +231,7 @@ class SummaryPage extends StatelessWidget {
                               }),
                               SizedBox(height: 10),
                               Container(
-                                height: 100,
+                                height: 110,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -254,7 +254,7 @@ class SummaryPage extends StatelessWidget {
                               ),
                               SizedBox(height: 10),
                               Container(
-                                height: 100,
+                                height: 110,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
